@@ -14,6 +14,7 @@ export default StyleSheet.create ({
         color: '#FFFF',
         marginTop: 35,
         justifyContent: 'center',
+        textAlign: 'center',
         marginBottom: 35,
     },
     logoBarbearia: {
@@ -28,7 +29,7 @@ export default StyleSheet.create ({
         width: 280,
         height: 55,
         backgroundColor: 'transparent',
-        margin: 35,
+        margin: 20,
         justifyContent: 'center'
     },
     text: {
@@ -65,5 +66,11 @@ export default StyleSheet.create ({
         width: '100%',
         alignItems: 'flex-end',
         marginRight: 140,
+    },
+    textInputSenha: {
+        color: '#FFFF',
+        paddingBottom: 10,
+        fontSize: 20,
+        marginRight: 205
     }
 })

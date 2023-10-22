@@ -18,6 +18,7 @@ export default function LoginBarbearia() {
     <LogoBarbearia />
     <Titulos>Login</Titulos>
     <Inputs>Palavra-chave</Inputs>
+    <Text style={Styles.textInputSenha}>Senha</Text>
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       <TextInput
         secureTextEntry={showPassword} style={Styles.input}
