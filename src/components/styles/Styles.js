@@ -72,5 +72,28 @@ export default StyleSheet.create ({
         paddingBottom: 10,
         fontSize: 20,
         marginRight: 205
+    },
+    containerLogoSecundaria: {
+        marginBottom: 400,
+        alignItems: 'center'
+    },
+    logoSecundaria: {
+        width: 120,
+        height: 80,
+        resizeMode: 'cover',
+    },
+    textLogoSecundaria: {
+        color: "#FFFF",
+        textAlign: 'center',
+        fontSize: 30
+    },
+    barraDePesquisa: {
+        borderWidth: 1,
+        borderRadius: 30,
+        width: 350,
+        height: 50,
+        backgroundColor: '#FFFF',
+        justifyContent: 'center',
+        color: 'black'
     }
 })
