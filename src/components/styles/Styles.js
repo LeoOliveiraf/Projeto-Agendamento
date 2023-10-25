@@ -97,4 +97,30 @@ export default StyleSheet.create ({
         color: 'black',
         textAlign: 'center',
     },
+    textHomeCliente: {
+        color: '#FFF',
+        fontSize: 20,
+        marginTop: 20,
+    },
+    textInformacaoBarber: {
+        color: '#FFF',
+        fontSize: 16,
+    },
+    imgHomeCliente: {
+        width: 25, 
+        height: 25, 
+        marginRight: 10,
+    },
+    textContainer: {
+        flexDirection: 'column', 
+        alignItems: 'center'
+    },
+    containerFilho: {
+        flexDirection: 'row',
+        marginTop: 20,
+        alignItems: 'left'
+    },
+    alinhamento: {
+        alignItems: 'left'
+    }
 })
