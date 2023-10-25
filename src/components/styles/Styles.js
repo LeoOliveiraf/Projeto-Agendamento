@@ -94,6 +94,7 @@ export default StyleSheet.create ({
         height: 50,
         backgroundColor: '#FFFF',
         justifyContent: 'center',
-        color: 'black'
-    }
+        color: 'black',
+        textAlign: 'center',
+    },
 })
