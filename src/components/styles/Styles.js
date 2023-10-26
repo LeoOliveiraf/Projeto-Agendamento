@@ -122,5 +122,52 @@ export default StyleSheet.create ({
     },
     alinhamento: {
         alignItems: 'left'
+    },
+    containerPerfil: {
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderColor: '#B9901E',
+        borderRadius: 30,
+        width: 350,
+        height: 210,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    InputPerfil: {
+        borderRadius: 30,
+        backgroundColor: '#FFFFFF',
+        width: 300,
+        height: 45,
+        marginBottom: 10,
+        paddingLeft: 15
+    },
+    tituloInput: {
+        color: '#FFFF',
+        fontSize: 18,
+        margin: 8
+    },
+    textInputConta: {
+        color: '#FFFF',
+        paddingBottom: 15,
+        fontSize: 20,
+        marginRight: 230
+    },
+    containerLocalizacao: {
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderColor: '#B9901E',
+        borderRadius: 30,
+        width: 350,
+        height: 300,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textInputLocalizacao: {
+        color: '#FFFFFF',
+        fontSize: 20,
+        width: '90%',
+        marginLeft: 30,
+        marginTop: 45,
+        marginBottom: 15
     }
 })
