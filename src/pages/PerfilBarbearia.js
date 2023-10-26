@@ -1,11 +1,15 @@
-import { Text, TextInput, View } from "react-native";
+import { ScrollView, Text, TextInput, View } from "react-native";
 import Styles from "../components/styles/Styles";
-import { useState } from "react";
-
+import LogoSecundaria from "../components/LogoSecundaria";
+import BotaoSalvar from "../components/BotaoSalvar";
+import BotaoDeslogar from "../components/BotaoDeslogar";    
 
 export default function PerfilBarbearia() {
     return(
+  
         <View style={Styles.appDefault}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{}}>
+        <LogoSecundaria>Perfil</LogoSecundaria> 
         <Text style={Styles.textInputConta}>Editar Conta</Text>
         <View style={Styles.containerPerfil}>
             <View style={{ width: '90%' }}>
@@ -32,6 +36,11 @@ export default function PerfilBarbearia() {
             </View>
             <TextInput style={Styles.InputPerfil} />
         </View>
+        <View style={{alignItems:'center'}}>
+            <BotaoSalvar>Salvar</BotaoSalvar>
+            <BotaoDeslogar>Deslogar</BotaoDeslogar>
+        </View>
+        </ScrollView>
     </View>
     )
 }
