@@ -1,16 +1,19 @@
-import { TextInput, TouchableOpacity, View } from "react-native";
+import { SearchBar } from "@rneui/themed";
+import { View } from "react-native";
 import Styles from "./styles/Styles";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-
-export default function BarraDePesquisa(props) {
+export default function BarraDePesquisa(){
     return(
         <View>
-            <TextInput style={Styles.barraDePesquisa} placeholder="Pesquisar Agendamento" placeholderTextColor={"#1E1E1E"}>{props.children}</TextInput>
-            <TouchableOpacity style={Styles.botaoBarraPesquisa}>
-                <Icon name="search" size={18} color="#FFF" style={Styles.icon} />
-            </TouchableOpacity>
-            
+            <SearchBar placeholder="Pesquisar agendamentos" 
+            containerStyle={{width: 320, backgroundColor: 'transparent', 
+                            borderBottomWidth: 0, borderTopColor: 0, marginBottom: -20}} 
+            inputContainerStyle={{height: 45, borderRadius: 40}}
+            round='false' 
+            lightTheme='true'
+            showCancel='true'>
+            </SearchBar>
         </View>
     )
-} 
+}

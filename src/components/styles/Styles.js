@@ -74,26 +74,49 @@ export default StyleSheet.create ({
         marginRight: 205
     },
     containerLogoSecundaria: {
-        marginBottom: 400,
         alignItems: 'center'
     },
     logoSecundaria: {
-        width: 120,
-        height: 80,
-        resizeMode: 'cover',
+        width: 100,
+        height: 50,
+        resizeMode: 'contain'
     },
     textLogoSecundaria: {
         color: "#FFFF",
         textAlign: 'center',
-        fontSize: 30
+        fontSize: 30,
+        marginTop: 10,
+        marginBottom: 30,
     },
-    barraDePesquisa: {
-        borderWidth: 1,
+    botaoCadastrar: {
         borderRadius: 30,
-        width: 350,
-        height: 50,
-        backgroundColor: '#FFFF',
+        width: 130,
+        height: 40,
+        backgroundColor: '#B9901E',
         justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 300, 
+        marginTop: 40,
+        alignSelf: 'flex-start',
+        marginRight: 40
+    },
+    botaoDeletar: {
+        borderRadius: 30,
+        width: 140,
+        height: 40,
+        backgroundColor: '#767676',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 300, 
+        marginTop: 40,
+        alignSelf: 'flex-end',
+    },
+    textBotao:{
+        fontSize: 18,
+        textAlign: 'center',
+        color: '#fff',
         color: 'black',
         textAlign: 'center',
     },

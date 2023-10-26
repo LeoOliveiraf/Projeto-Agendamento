@@ -6,8 +6,8 @@ import logoSecundaria from '../assets/logoSecundaria.png';
 export default function LogoSecundaria(props) {
     return (
         <View style={Styles.containerLogoSecundaria}>
-             <Image source={logoSecundaria} style={Styles.logoSecundaria}/>
-             <Text style={Styles.textLogoSecundaria}>{props.children}</Text>  
+            <Image source={logoSecundaria} style={Styles.logoSecundaria}/>
+            <Text style={Styles.textLogoSecundaria}>{props.children}</Text>  
         </View>
     )
           
