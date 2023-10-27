@@ -23,12 +23,12 @@ export default App = () => {
         <View style={{width: 340}}>
         <DataTable>
             <DataTable.Header style={{ borderBottomColor: '#B9901E', justifyContent: 'center'}}>
-                <DataTable.Title style={{marginLeft: 10}} textStyle={styles.title}>Nome</DataTable.Title>
+                <DataTable.Title style={{marginLeft: 20}} textStyle={styles.title}>Nome</DataTable.Title>
                 <DataTable.Title style={{marginLeft: 10}} textStyle={styles.title} >
                     Horário
                 </DataTable.Title>
                 <DataTable.Title style={{marginLeft: 10}} textStyle={styles.title}>Serviço</DataTable.Title>
-                <DataTable.Title style={{marginLeft: 10}} textStyle={styles.title}>Ações</DataTable.Title>
+                <DataTable.Title style={{marginLeft: 15}} textStyle={styles.title}>Ações</DataTable.Title>
             </DataTable.Header>
             {
             agendamentos.map(agendamento => {
@@ -41,10 +41,10 @@ export default App = () => {
                     console.log(`agendamento selecionado ${agendamento.id}`)
                 }}
                 >
-                <DataTable.Cell style={{marginLeft: 10}} textStyle={styles.cell}>
+                <DataTable.Cell style={{marginLeft: 15}} textStyle={styles.cell}>
                     {agendamento.nome}
                 </DataTable.Cell>
-                <DataTable.Cell style={{marginLeft: 10}} textStyle={styles.cell}>
+                <DataTable.Cell style={{marginLeft: 15}} textStyle={styles.cell}>
                     {agendamento.horario}
                 </DataTable.Cell>
                 <DataTable.Cell style={{marginLeft: 10}} textStyle={styles.cell}> 
@@ -52,7 +52,7 @@ export default App = () => {
                 </DataTable.Cell>
                 <DataTable.Cell style={{marginLeft: 10}}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Icon name='pencil'size={20} color='#B9901E' style={{ marginRight: 15 }}/>
+                    <Icon name='pencil'size={20} color='#B9901E' style={{ marginRight: 10, marginLeft: 5}}/>
                     <Icon name='trash' size={20} color='#767676'/>
                 </View>
                 </DataTable.Cell>
