@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, Platform, ScrollView, Text, TextInput } from "react-native";
+import { KeyboardAvoidingView, Platform, Text, TextInput } from "react-native";
 import Styles from "./styles/Styles";
 
 

@@ -1,5 +1,4 @@
 import { View } from 'react-native';
-import LogoBarbearia from '../components/LogoBarbearia';
 import BotaoSecundario from '../components/BotaoSecundario';
 import Styles from '../components/styles/Styles';
 import Titulos from '../components/Titulos';

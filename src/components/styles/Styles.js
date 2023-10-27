@@ -1,7 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
-const width = Dimensions.get('screen').width;
-
 export default StyleSheet.create ({
     appDefault:{
         backgroundColor: '#1E1E1E',
@@ -96,7 +94,6 @@ export default StyleSheet.create ({
         justifyContent: 'center',
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 300, 
         marginTop: 40,
         alignSelf: 'flex-start',
         marginRight: 40
@@ -109,15 +106,13 @@ export default StyleSheet.create ({
         justifyContent: 'center',
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 300, 
         marginTop: 40,
         alignSelf: 'flex-end',
     },
-    textBotao:{
-        fontSize: 18,
+    textBotao: {
+        fontSize: 16,
         textAlign: 'center',
         color: '#fff',
-        color: 'black',
         textAlign: 'center',
     },
     textHomeCliente: {

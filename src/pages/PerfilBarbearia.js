@@ -1,6 +1,5 @@
 import { Text, TextInput, View } from "react-native";
 import Styles from "../components/styles/Styles";
-import { useState } from "react";
 
 
 export default function PerfilBarbearia() {
