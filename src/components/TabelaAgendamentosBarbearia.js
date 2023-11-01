@@ -14,45 +14,45 @@ export default App = () => {
         {
             id: 2,
             nome: 'Pedro',
-            horario: '15h30',
+            horario: '9h30',
             servico: 'Sobrancelha'
         },
     ];
 
     return (
-        <View style={{width: 340}}>
+        <View style={{width: 310, }}>
         <DataTable>
-            <DataTable.Header style={{ borderBottomColor: '#B9901E', justifyContent: 'center'}}>
-                <DataTable.Title style={{marginLeft: 20}} textStyle={styles.title}>Nome</DataTable.Title>
-                <DataTable.Title style={{marginLeft: 10}} textStyle={styles.title} >
+            <DataTable.Header style={{ borderBottomColor: '#B9901E'}}>
+                <DataTable.Title textStyle={styles.title}>Nome</DataTable.Title>
+                <DataTable.Title textStyle={styles.title}>
                     Horário
                 </DataTable.Title>
-                <DataTable.Title style={{marginLeft: 10}} textStyle={styles.title}>Serviço</DataTable.Title>
-                <DataTable.Title style={{marginLeft: 15}} textStyle={styles.title}>Ações</DataTable.Title>
+                <DataTable.Title textStyle={styles.title}>Serviço</DataTable.Title>
+                <DataTable.Title style={{marginLeft: 5}} textStyle={styles.title}>Ações</DataTable.Title>
             </DataTable.Header>
             {
             agendamentos.map(agendamento => {
             return (
                 <DataTable.Row 
-                    style={{ borderBottomColor: '#B9901E'}}
+                    style={{ borderBottomColor: '#B9901E' }}
                     key={agendamento.id} // you need a unique key per item
                     onPress={() => {
                     // added to illustrate how you can make the row take the onPress event and do something
                     console.log(`agendamento selecionado ${agendamento.id}`)
                 }}
                 >
-                <DataTable.Cell style={{marginLeft: 15}} textStyle={styles.cell}>
+                <DataTable.Cell textStyle={styles.cell}>
                     {agendamento.nome}
                 </DataTable.Cell>
-                <DataTable.Cell style={{marginLeft: 15}} textStyle={styles.cell}>
+                <DataTable.Cell textStyle={styles.cell}>
                     {agendamento.horario}
                 </DataTable.Cell>
-                <DataTable.Cell style={{marginLeft: 10}} textStyle={styles.cell}> 
+                <DataTable.Cell textStyle={styles.cell}> 
                     {agendamento.servico}
                 </DataTable.Cell>
-                <DataTable.Cell style={{marginLeft: 10}}>
+                <DataTable.Cell textStyle={styles.cell}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Icon name='pencil'size={20} color='#B9901E' style={{ marginRight: 10, marginLeft: 5}}/>
+                    <Icon name='pencil'size={20} color='#B9901E' style={{ marginLeft: 10, marginRight: 10}}/>
                     <Icon name='trash' size={20} color='#767676'/>
                 </View>
                 </DataTable.Cell>
@@ -68,10 +68,11 @@ const styles = StyleSheet.create({
         fontSize: 14, 
         color: '#fff', 
         fontWeight: 'bold',
-        justifyContent: 'center'
+        marginStart: 10
     },
     cell: {
         fontSize: 14, 
-        color: '#CECECE'
+        color: '#CECECE',
+        marginStart: 10
     }
   });

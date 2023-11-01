@@ -81,7 +81,6 @@ export default StyleSheet.create ({
     },
     textLogoSecundaria: {
         color: "#FFFF",
-        textAlign: 'center',
         fontSize: 30,
         marginTop: 10,
         marginBottom: 30,
@@ -94,7 +93,6 @@ export default StyleSheet.create ({
         justifyContent: 'center',
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 40,
         alignSelf: 'flex-start',
         marginRight: 40
     },
@@ -106,7 +104,6 @@ export default StyleSheet.create ({
         justifyContent: 'center',
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 40,
         alignSelf: 'flex-end',
     },
     textBotao: {
@@ -187,5 +184,5 @@ export default StyleSheet.create ({
         marginLeft: 30,
         marginTop: 45,
         marginBottom: 15
-    }
+    },
 })
