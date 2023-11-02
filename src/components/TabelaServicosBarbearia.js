@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { DataTable } from 'react-native-paper';
 
-export default App = () => {
+export default App = ({onPress, onPressDeletar}) => {
     var servicos = [
         {
             id: 1,
@@ -46,8 +46,8 @@ export default App = () => {
                 </DataTable.Cell>
                 <DataTable.Cell textStyle={styles.cell}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Icon name='pencil'size={20} color='#B9901E' style={{ marginLeft: 25, marginRight: 10}}/>
-                    <Icon name='trash' size={20} color='#767676'/>
+                    <Icon name='pencil'size={20} color='#B9901E' style={{ marginLeft: 25, marginRight: 10}} onPress={onPress}/>
+                    <Icon name='trash' size={20} color='#767676' onPress={onPressDeletar}/>
                 </View>
                 </DataTable.Cell>
                 </DataTable.Row>
