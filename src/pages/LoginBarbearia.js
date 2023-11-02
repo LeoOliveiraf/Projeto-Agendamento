@@ -3,7 +3,7 @@ import { View, TouchableOpacity, TextInput, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Styles from '../components/styles/Styles';
 import LogoBarbearia from '../components/LogoBarbearia';
-import Titulos from '../components/Titulos';
+import Titulos from '../components/Titulo';
 import Inputs from '../components/Inputs';
 import BotaoEnviar from '../components/BotaoEnviar';
 

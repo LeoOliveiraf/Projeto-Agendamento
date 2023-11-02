@@ -1,45 +1,41 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-import barba from "../assets/barba.png";
 
 export default function VisuAgendamentoCliente({servico, data, hora}) {
     return (
       <View style={styles.visualizaInfo}>
-        <View style={{  justifyContent: 'center', textAlign: 'center', alignItems: 'center',}}>
-          <Image source={barba} style={styles.image}/>
-        </View>
         <Text style={styles.text}>{servico}</Text>
-        <Text style={styles.textDataHora}>{data}</Text>
-        <Text style={styles.textDataHora}>{hora}</Text>
+        <Text style={styles.textValor}>{data}</Text>
+        <Text style={styles.textDuracao}>{hora}</Text>
       </View>
     )
 }
 
 const styles = StyleSheet.create({
 visualizaInfo: {
-    backgroundColor: 'white',
-    width: 'auto',
-    height: 'auto',
+    backgroundColor: '#fafafa',
+    width: 130,
+    height: 150,
     borderRadius: 30,
     borderWidth: 2,
     borderColor: '#B9901E',
-    padding: 10,
-    marginRight: 10
+    margin: 20
   },
   text: {
-    fontSize: 15,
+    fontSize: 24,
     color: 'black',
     textAlign: 'center',
     justifyContent: 'center',
+    padding: 20
   },
-  textDataHora: {
-    fontSize: 13,
+  textValor: {
+    fontSize: 20,
     color: 'black',
+    fontWeight: '500',
     textAlign: 'center',
     justifyContent: 'center',
   },
-  image: {
-    width: 100,
-    height: 60,
-    borderRadius: 15
+  textDuracao:{
+    textAlign: 'center',
+    justifyContent: 'center',
   }
 });

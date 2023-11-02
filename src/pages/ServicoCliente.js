@@ -11,10 +11,6 @@ export default function AgendamentoCliente() {
         <View style={styles.containerAtivo}>
           <VisuAgendamentoCliente servico={'Barba'} data={'R$ 40,00'} hora={'Duração: 30min'}/>
           <VisuAgendamentoCliente servico={'Corte'} data={'R$ 40,00'}  hora={'Duração: 30min'}/>
-          <VisuAgendamentoCliente servico={'Barba'} data={'R$ 40,00'}  hora={'Duração: 30min'}/>
-        </View>
-        <View style={styles.containerAtivo}>
-          <VisuAgendamentoCliente servico={'Sobrancelha'} data={'R$ 40,00'}  hora={'Duração: 30min'}/>
         </View>
       </View>
       </View>
@@ -24,5 +20,7 @@ export default function AgendamentoCliente() {
 const styles = StyleSheet.create({
   containerAtivo: {
     flexDirection: "row",
+    justifyContent: 'center',
+    alignContent: 'center',
   },
 });
