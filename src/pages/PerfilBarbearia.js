@@ -1,5 +1,8 @@
 import { Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Styles from "../components/styles/Styles";
+import { useState } from "react";
+import LogoSecundaria from "../components/LogoSecundaria";
+import Icon from "react-native-vector-icons/AntDesign";
 
 
 export default function PerfilBarbearia() {

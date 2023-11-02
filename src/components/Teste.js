@@ -1,8 +1,9 @@
 import React from 'react';
 import { Modal, View, Text, Pressable, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { TextInput } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-export default function Teste({ visible, onClose }) {
+export default function Teste({ visible, onClose, text, isText, isInput, textMensagem}) {
   return (
     <Modal
       animationType="slide"
@@ -12,15 +13,21 @@ export default function Teste({ visible, onClose }) {
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>Tem certeza que deseja deletar todos os agendamentos?</Text>
+          { isInput ? (<View>
+            <Text style={{marginTop: 15, fontSize: 17}}>Nome</Text>
+            <TextInput style={styles.inpuModal}/>
+            <Text style={{fontSize: 17}}>Celular (com DDD)</Text>
+            <TextInput style={styles.inpuModal}/>
+          </View>) : null }
+          { isText ? (<Text style={styles.modalText}>{textMensagem}</Text>) : null }
           <Pressable
             style={[styles.button, styles.buttonClose]}
             onPress={onClose}
           >
-            <Text style={styles.textStyle}>Deletar todos</Text>
+            <Text style={styles.textStyle}>{text}</Text>
           </Pressable>
           <Pressable style={styles.closeButton} onPress={onClose}>
-            <Icon name='times' size={30} color='#B9901E'/>
+            <Icon name='close' size={30} color='#B9901E'/>
           </Pressable>
         </View>
       </View>
@@ -59,8 +66,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   modalText: {
+    marginTop: 20,
     marginBottom: 15,
     textAlign: 'center',
+    fontSize: 20
   },
   closeButton: {
     position: 'absolute',
@@ -68,5 +77,14 @@ const styles = StyleSheet.create({
     left: 10,
     padding: 5,
     margin: -3
+  },
+  inpuModal: {
+    backgroundColor: '#CECECE',
+    width: 250,
+    height: 37,
+    borderRadius: 25,
+    marginBottom: 20,
+    paddingLeft: 10,
+    color: '#000',
   },
 });
