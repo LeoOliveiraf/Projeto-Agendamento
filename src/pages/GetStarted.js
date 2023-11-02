@@ -4,13 +4,13 @@ import BotaoSecundario from '../components/BotaoSecundario';
 import Styles from '../components/styles/Styles';
 import Titulos from '../components/Titulo';
 
-export default function GetStarted() {
+export default function GetStarted({ navigation }) {
   return (
     <View style={Styles.appDefault}>
       <LogoBarbearia/>
       <Titulos>Bem-Vindo!</Titulos>
-      <BotaoSecundario>Sou Cliente</BotaoSecundario>
-      <BotaoSecundario>Sou Administrador</BotaoSecundario>
+      <BotaoSecundario onPress={() => {navigation.navigate('LoginCliente')}} text={'Sou Cliente'}/>
+      <BotaoSecundario onPress={() => {navigation.navigate('LoginBarbearia')}} text={'Sou Administrador'} />
     </View>
   );
 }

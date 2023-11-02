@@ -4,15 +4,15 @@ import Styles from '../components/styles/Styles';
 import Titulos from '../components/Titulo';
 import LogoHome from '../components/LogoHome';
 
-export default function GetStarted() {
+export default function HomeBarbearia() {
   return (
     <View style={Styles.appDefault}>
       <LogoHome />
       <Titulos>Gerencie {'\n'} sua Barbearia</Titulos>
-      <BotaoSecundario>Agendamentos</BotaoSecundario>
-      <BotaoSecundario>Serviços</BotaoSecundario>
-      <BotaoSecundario>Clientes</BotaoSecundario>
-      <BotaoSecundario>Perfil</BotaoSecundario>
+      <BotaoSecundario text={'Agendamentos'} />
+      <BotaoSecundario text={'Serviços'} />
+      <BotaoSecundario text={'Clientes'} />
+      <BotaoSecundario text={'Perfil'} />
     </View>
   );
 }

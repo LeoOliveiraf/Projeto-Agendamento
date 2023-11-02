@@ -7,7 +7,7 @@ import Titulos from '../components/Titulo';
 import Inputs from '../components/Inputs';
 import BotaoEnviar from '../components/BotaoEnviar';
 
-export default function LoginBarbearia() {
+export default function LoginBarbearia({navigation}) {
   const [showPassword, setShowPassword] = useState(true);
 
   const changeVisibility = () => {
@@ -27,7 +27,7 @@ export default function LoginBarbearia() {
         <Icon name={showPassword ? 'eye-slash' : 'eye'} size={25} color="#CECECE" />
       </TouchableOpacity>
     </View>
-    <BotaoEnviar />
+    <BotaoEnviar onPress={() => {navigation.navigate('HomeBarbearia')}}/>
   </View>
   );
 }

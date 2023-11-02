@@ -4,14 +4,14 @@ import LogoBarbearia from "../components/LogoBarbearia";
 import Titulos from '../components/Titulo';
 import Inputs from '../components/Inputs';
 import BotaoEnviar from "../components/BotaoEnviar";
-export default function LoginCliente() {
+export default function LoginCliente({navigation}) {
     return(
         <View style={Styles.appDefault}>
                 <LogoBarbearia />
                 <Titulos>Login</Titulos>
                 <Inputs>Nome</Inputs>
                 <Inputs>Celular (com DDD)</Inputs>
-                <BotaoEnviar />
+                <BotaoEnviar onPress={() => {navigation.navigate('HomeCliente')}}/>
         </View>
     )
 }
