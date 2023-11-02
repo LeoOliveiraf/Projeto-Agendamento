@@ -61,8 +61,7 @@ export default function ClientesBarbearia(props) {
         key={4}
         text={"Deletar"}
         isInput={false}
-        textMensagem={`Tem certeza que deseja deletar 'Leonardo' da lista de clientes?`}
-      />
+        textMensagem={`Tem certeza que deseja deletar 'Leonardo' da lista de clientes?`} botaoFechar={true}/>
     </View>
   );
 }

@@ -11,6 +11,7 @@ export default function Teste({
   isInput,
   textMensagem,
   inputModalService,
+  botaoFechar,
 }) {
   const [valueInputDuracao, setValueInputDuracao] = useState('')
   return (
