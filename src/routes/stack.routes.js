@@ -4,6 +4,12 @@ import HomeBarbearia from '../pages/HomeBarbearia'
 import HomeCliente from '../pages/HomeCliente'
 import LoginCliente from '../pages/LoginCliente'
 import LoginBarbearia from '../pages/LoginBarbearia'
+import AgendamentoCliente from '../pages/AgendamentoCliente'
+import ServicoCliente from '../pages/ServicoCliente'
+import AgendamentoBarbearias from '../pages/AgendamentoBarbearias'
+import ServicoBarbearia from '../pages/ServicosBarbearia'
+import ClientesBarbearia from '../pages/ClientesBarbearia'
+import PerfilBarbearia from '../pages/PerfilBarbearia'
 const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {
@@ -24,7 +30,24 @@ export default function StackRoutes() {
             <Stack.Screen name="HomeBarbearia"
                 component={HomeBarbearia}
             /> 
-               
+            <Stack.Screen name="AgendamentoCliente"
+                component={AgendamentoCliente}
+            />
+            <Stack.Screen name="ServicoCliente"
+                component={ServicoCliente}
+            /> 
+            <Stack.Screen name="AgendamentoBarbearias"
+                component={AgendamentoBarbearias}
+            />
+            <Stack.Screen name="ServicosBarbearia"
+                component={ServicoBarbearia}
+            />  
+            <Stack.Screen name="ClientesBarbearia"
+                component={ClientesBarbearia}
+            />
+            <Stack.Screen name="PerfilBarbearia"
+                component={PerfilBarbearia}
+            />        
         </Stack.Navigator>
     )
 }

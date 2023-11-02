@@ -6,13 +6,13 @@ import BotaoSecundario from "../components/BotaoSecundario";
 import imgLocalizacao from "../assets/imgLocalizacao.png";
 import whatsapp from "../assets/whatsapp.png";
 import instagram from "../assets/instagram.png";
-export default function HomeCliente() {
+export default function HomeCliente({navigation}) {
   return (
     <View style={Styles.appDefault}>
       <LogoHome />
       <Titulos>Olá Murilo. {"\n"} Seja bem-vindo!</Titulos>
-      <BotaoSecundario text={'Agendamentos'}/>
-      <BotaoSecundario text={'Nossos Serviços'}/>
+      <BotaoSecundario text={'Agendamentos'} onPress={() => {navigation.navigate('AgendamentoCliente')}}/>
+      <BotaoSecundario text={'Nossos Serviços'} onPress={() => {navigation.navigate('ServicoCliente')}}/>
 
       <View style={Styles.textContainer}>
         <View style={Styles.alinhamento}>
