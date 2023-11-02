@@ -24,12 +24,12 @@ export default function AgendamentoBarbearia(props) {
       <LogoSecundaria>Agendamentos</LogoSecundaria>
       <BarraDePesquisa />
       <View style={{ flexDirection: 'row', marginTop: 40, marginBottom: 30 }}>
-        <BotaoCadastrar onPress={handleAgendarPress} />
-        <BotaoDeletar>Deletar todos</BotaoDeletar>
+        <BotaoCadastrar  text={'Agendar'}/>
+        <BotaoDeletar onPress={handleAgendarPress} text={'Deletar todos'}/>
       </View>
       <Text style={[Styles.textLogoSecundaria, { fontSize: 25, marginBottom: 10, alignSelf: 'flex-start', marginLeft: 30 }]}>Dia 05/10/2023</Text>
-      <Teste visible={modalVisible} onClose={handleModalClose} />
+      <Teste visible={modalVisible} onClose={handleModalClose} textMensagem={'Tem certeza que deseja deletar todos os agendamentos?'} isText={true} isInput={false} text={'Deletar todos'}/>
       <Tabela />
     </View>
-  );
+  )
 }

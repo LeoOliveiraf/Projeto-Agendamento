@@ -1,8 +1,19 @@
-import React from 'react';
-import { Modal, View, Text, Pressable, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { useState } from "react";
+import { Modal, View, Text, Pressable, StyleSheet } from "react-native";
+import { TextInput } from "react-native";
+import Icon from "react-native-vector-icons/AntDesign";
 
-export default function Teste({ visible, onClose }) {
+export default function Teste({
+  visible,
+  onClose,
+  text,
+  isText,
+  isInput,
+  textMensagem,
+  inputModalService,
+  botaoFechar,
+}) {
+  const [valueInputDuracao, setValueInputDuracao] = useState('')
   return (
     <Modal
       animationType="slide"
@@ -12,15 +23,34 @@ export default function Teste({ visible, onClose }) {
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>Tem certeza que deseja deletar todos os agendamentos?</Text>
+          {isInput ? (
+            <View>
+              <Text style={{ marginTop: 15, fontSize: 17 }}>Nome</Text>
+              <TextInput style={styles.inpuModal} />
+              <Text style={{ fontSize: 17 }}>Celular (com DDD)</Text>
+              <TextInput style={styles.inpuModal} />
+            </View>
+          ) : null}
+          {inputModalService ? (
+            <View>
+              <Text style={{ marginTop: 15, fontSize: 17 }}>Nome</Text>
+              <TextInput style={styles.inpuModal} />
+              <Text style={{ fontSize: 17 }}>Valor</Text>
+              <TextInput style={styles.inpuModal} />
+              <Text style={{ fontSize: 17 }}>Duração</Text>
+              <TextInput keyboardType="numeric" value={valueInputDuracao} style={styles.inpuModal} />
+              {/*Usar o useState junto com esse value para manipular o valor*/}
+            </View>
+          ) : null}
+          {isText ? <Text style={styles.modalText}>{textMensagem}</Text> : null}
           <Pressable
             style={[styles.button, styles.buttonClose]}
             onPress={onClose}
           >
-            <Text style={styles.textStyle}>Deletar todos</Text>
+            <Text style={styles.textStyle}>{text}</Text>
           </Pressable>
           <Pressable style={styles.closeButton} onPress={onClose}>
-            <Icon name='times' size={30} color='#B9901E'/>
+            <Icon name="close" size={30} color="#B9901E" />
           </Pressable>
         </View>
       </View>
@@ -31,17 +61,17 @@ export default function Teste({ visible, onClose }) {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 22,
   },
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 30,
     padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOpacity: 0.25,
     shadowRadius: 4,
   },
@@ -51,22 +81,33 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonClose: {
-    backgroundColor: '#B9901E',
+    backgroundColor: "#B9901E",
   },
   textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
   },
   modalText: {
+    marginTop: 20,
     marginBottom: 15,
-    textAlign: 'center',
+    textAlign: "center",
+    fontSize: 20,
   },
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     top: 10,
     left: 10,
     padding: 5,
-    margin: -3
+    margin: -3,
+  },
+  inpuModal: {
+    backgroundColor: "#CECECE",
+    width: 250,
+    height: 37,
+    borderRadius: 25,
+    marginBottom: 20,
+    paddingLeft: 10,
+    color: "#000",
   },
 });
