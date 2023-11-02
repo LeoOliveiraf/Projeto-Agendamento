@@ -11,8 +11,8 @@ export default function HomeCliente() {
     <View style={Styles.appDefault}>
       <LogoHome />
       <Titulos>Olá Murilo. {"\n"} Seja bem-vindo!</Titulos>
-      <BotaoSecundario>Agendamentos</BotaoSecundario>
-      <BotaoSecundario>Nossos Serviços</BotaoSecundario>
+      <BotaoSecundario text={'Agendamentos'}/>
+      <BotaoSecundario text={'Nossos Serviços'}/>
 
       <View style={Styles.textContainer}>
         <View style={Styles.alinhamento}>
