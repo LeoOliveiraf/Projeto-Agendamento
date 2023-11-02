@@ -1,7 +1,7 @@
 import { Image, Text, View } from "react-native";
 import LogoHome from "../components/LogoHome";
 import Styles from "../components/styles/Styles";
-import Titulos from "../components/Titulos";
+import Titulos from "../components/Titulo";
 import BotaoSecundario from "../components/BotaoSecundario";
 import imgLocalizacao from "../assets/imgLocalizacao.png";
 import whatsapp from "../assets/whatsapp.png";
