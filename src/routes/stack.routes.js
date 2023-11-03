@@ -1,15 +1,15 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import GetStarted from '../pages/GetStarted'
-import HomeBarbearia from '../pages/HomeBarbearia'
-import HomeCliente from '../pages/HomeCliente'
-import LoginCliente from '../pages/LoginCliente'
-import LoginBarbearia from '../pages/LoginBarbearia'
-import AgendamentoCliente from '../pages/AgendamentoCliente'
-import ServicoCliente from '../pages/ServicoCliente'
-import AgendamentoBarbearias from '../pages/AgendamentoBarbearias'
-import ServicoBarbearia from '../pages/ServicosBarbearia'
-import ClientesBarbearia from '../pages/ClientesBarbearia'
-import PerfilBarbearia from '../pages/PerfilBarbearia'
+import Clientes from '../pages/Barbearia/Clientes'
+import Perfil from '../pages/Barbearia/Perfil'
+import HomeC from '../pages/Clientes/HomeC'
+import HomeB from '../pages/Barbearia/HomeB'
+import LoginC from '../pages/Clientes/LoginC'
+import LoginB from '../pages/Barbearia/LoginB'
+import AgendamentoC from '../pages/Clientes/AgendamentosC'
+import AgendamentoB from '../pages/Barbearia/AgendamentosB'
+import ServicoC from '../pages/Clientes/ServicosC'
+import ServicoB from '../pages/Barbearia/ServicosB'
 const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {
@@ -18,35 +18,35 @@ export default function StackRoutes() {
             <Stack.Screen name="GetStarted"
                 component={GetStarted}
             />
-            <Stack.Screen name="LoginCliente"
-                component={LoginCliente}
+            <Stack.Screen name="LoginC"
+                component={LoginC}
             />
-            <Stack.Screen name="HomeCliente"
-                component={HomeCliente}
+            <Stack.Screen name="HomeC"
+                component={HomeC}
             /> 
-            <Stack.Screen name="LoginBarbearia"
-                component={LoginBarbearia}
+            <Stack.Screen name="LoginB"
+                component={LoginB}
             />
-            <Stack.Screen name="HomeBarbearia"
-                component={HomeBarbearia}
+            <Stack.Screen name="HomeB"
+                component={HomeB}
             /> 
-            <Stack.Screen name="AgendamentoCliente"
-                component={AgendamentoCliente}
+            <Stack.Screen name="AgendamentoC"
+                component={AgendamentoC}
             />
-            <Stack.Screen name="ServicoCliente"
-                component={ServicoCliente}
+            <Stack.Screen name="ServicoC"
+                component={ServicoC}
             /> 
-            <Stack.Screen name="AgendamentoBarbearias"
-                component={AgendamentoBarbearias}
+            <Stack.Screen name="AgendamentoB"
+                component={AgendamentoB}
             />
-            <Stack.Screen name="ServicosBarbearia"
-                component={ServicoBarbearia}
+            <Stack.Screen name="ServicosB"
+                component={ServicoB}
             />  
-            <Stack.Screen name="ClientesBarbearia"
-                component={ClientesBarbearia}
+            <Stack.Screen name="ClientesB"
+                component={Clientes}
             />
-            <Stack.Screen name="PerfilBarbearia"
-                component={PerfilBarbearia}
+            <Stack.Screen name="PerfilB"
+                component={Perfil}
             />        
         </Stack.Navigator>
     )
