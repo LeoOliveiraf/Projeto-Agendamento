@@ -7,13 +7,13 @@ import localizacao from "../../assets/imgs/localizacao.png"
 import whatsapp from "../../assets/imgs/whatsapp.png";
 import instagram from "../../assets/imgs/instagram.png";
 
-export default function HomeC() {
+export default function HomeC({navigation}) {
   return (
     <View style={Styles.appDefault}>
       <LogoHome />
       <Titulos>Olá Murilo. {"\n"} Seja bem-vindo!</Titulos>
-      <BotaoSecundario>Agendamentos</BotaoSecundario>
-      <BotaoSecundario>Nossos Serviços</BotaoSecundario>
+      <BotaoSecundario text={'Agendamentos'} onPress={() => {navigation.navigate('AgendamentosC')}} />
+      <BotaoSecundario text={'Nossos Serviços'} onPress={() => {navigation.navigate('ServicosC')}}/>
 
       <View style={Styles.textContainer}>
         <View style={Styles.alinhamento}>

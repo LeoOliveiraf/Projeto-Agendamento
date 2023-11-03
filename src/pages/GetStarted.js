@@ -9,8 +9,8 @@ export default function GetStarted({ navigation }) {
     <View style={Styles.appDefault}>
       <LogoBarbearia/>
       <Titulos>Bem-Vindo!</Titulos>
-      <BotaoSecundario onPress={() => {navigation.navigate('LoginCliente')}} text={'Sou Cliente'}/>
-      <BotaoSecundario onPress={() => {navigation.navigate('LoginBarbearia')}} text={'Sou Administrador'} />
+      <BotaoSecundario onPress={() => {navigation.navigate('LoginC')}} text={'Sou Cliente'}/>
+      <BotaoSecundario onPress={() => {navigation.navigate('LoginB')}} text={'Sou Administrador'} />
     </View>
   );
 }

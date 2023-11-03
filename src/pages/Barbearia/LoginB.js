@@ -7,7 +7,7 @@ import Titulos from '../../components/Titulo';
 import Inputs from '../../components/Inputs';
 import BotaoEnviar from '../../components/BotaoEnviar';
 
-export default function LoginB() {
+export default function LoginB({navigation}) {
   const [showPassword, setShowPassword] = useState(true);
 
   const changeVisibility = () => {
@@ -17,7 +17,7 @@ export default function LoginB() {
     <View style={Styles.appDefault}>
     <LogoBarbearia />
     <Titulos>Login</Titulos>
-    <Inputs>Palavra-chave</Inputs>
+    <Inputs text={'Palavra-chave'}/>
     <Text style={Styles.textInputSenha}>Senha</Text>
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       <TextInput
@@ -27,7 +27,7 @@ export default function LoginB() {
         <Icon name={showPassword ? 'eye-slash' : 'eye'} size={25} color="#CECECE" />
       </TouchableOpacity>
     </View>
-    <BotaoEnviar />
+    <BotaoEnviar onPress={() => {navigation.navigate('HomeB')}}/>
   </View>
   );
 }
