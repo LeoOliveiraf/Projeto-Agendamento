@@ -1,6 +1,7 @@
 import {
   Modal,
   Pressable,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -8,20 +9,17 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Styles from "../components/styles/Styles";
+import Styles from "../../components/styles/Styles";
 import { useState } from "react";
-import LogoSecundaria from "../components/LogoSecundaria";
+import LogoSecundaria from "../../components/LogoSecundaria";
 import Icon from "react-native-vector-icons/AntDesign";
 
-export default function PerfilBarbearia() {
+export default function Perfil() {
   const [modalVisibleSalvar, setModalVisibleSalvar] = useState(false);
   const [modalVisibleDeslogar, setModalVisibleDeslogar] = useState(false);
   return (
-    <View style={Styles.appDefault}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{}}
-      >
+    <SafeAreaView style={Styles.appDefault}>
+      <ScrollView style={{margin: 20}} showsVerticalScrollIndicator={false}>
         <LogoSecundaria>Perfil</LogoSecundaria>
         <Text style={Styles.textInputConta}>Editar Conta</Text>
         <View style={Styles.containerPerfil}>
@@ -126,7 +124,7 @@ export default function PerfilBarbearia() {
           </Pressable>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({

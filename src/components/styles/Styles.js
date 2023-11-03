@@ -1,4 +1,5 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { useFonts } from 'expo-font';
 
 export default StyleSheet.create ({
     appDefault:{
@@ -6,6 +7,7 @@ export default StyleSheet.create ({
         justifyContent: 'center', 
         alignItems: 'center', 
         flex: 1,
+        paddingTop: 30
     },
     textoDoTitulo: {
         fontSize: 36,

@@ -5,6 +5,7 @@ import Styles from '../components/styles/Styles';
 import Titulos from '../components/Titulo';
 
 export default function GetStarted() {
+  
   return (
     <View style={Styles.appDefault}>
       <LogoBarbearia/>
