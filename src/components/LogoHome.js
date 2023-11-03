@@ -1,5 +1,5 @@
 import { Image, View } from 'react-native';
-import homeBarbearia from '../assets/homeBarbearia.png';
+import homeBarbearia from '../assets/imgs/homeBarbearia.png';
 
 export default function HomeBarbearia() {
     return (

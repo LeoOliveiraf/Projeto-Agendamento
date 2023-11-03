@@ -1,6 +1,6 @@
 import { Image, Text, View } from 'react-native';
 import Styles from './styles/Styles';
-import logoSecundaria from '../assets/logoSecundaria.png';
+import logoSecundaria from '../assets/imgs/logoSecundaria.png';
 
 
 export default function LogoSecundaria(props) {

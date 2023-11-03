@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { View, TouchableOpacity, TextInput, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Styles from '../components/styles/Styles';
-import LogoBarbearia from '../components/LogoBarbearia';
-import Titulos from '../components/Titulo';
-import Inputs from '../components/Inputs';
-import BotaoEnviar from '../components/BotaoEnviar';
+import Styles from '../../components/styles/Styles';
+import LogoBarbearia from '../../components/LogoBarbearia';
+import Titulos from '../../components/Titulo';
+import Inputs from '../../components/Inputs';
+import BotaoEnviar from '../../components/BotaoEnviar';
 
-export default function LoginBarbearia({navigation}) {
+export default function LoginB() {
   const [showPassword, setShowPassword] = useState(true);
 
   const changeVisibility = () => {
@@ -27,7 +27,7 @@ export default function LoginBarbearia({navigation}) {
         <Icon name={showPassword ? 'eye-slash' : 'eye'} size={25} color="#CECECE" />
       </TouchableOpacity>
     </View>
-    <BotaoEnviar onPress={() => {navigation.navigate('HomeBarbearia')}}/>
+    <BotaoEnviar />
   </View>
   );
 }
