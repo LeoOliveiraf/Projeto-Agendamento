@@ -1,6 +1,5 @@
 
 import GetStarted from "../pages/GetStarted";
-import Clientes from "../pages/Barbearia/Clientes";
 import Perfil from "../pages/Barbearia/Perfil";
 import HomeC from "../pages/Clientes/HomeC";
 import HomeB from "../pages/Barbearia/HomeB";
@@ -27,7 +26,6 @@ export default function StackRoutes() {
       <Stack.Screen name="ServicosC" component={ServicosC} />
       <Stack.Screen name="AgendamentosB" component={AgendamentosB} />
       <Stack.Screen name="ServicosB" component={ServicosB} />
-      <Stack.Screen name="Clientes" component={Clientes} />
       <Stack.Screen name="Perfil" component={Perfil} />
     </Stack.Navigator>
   );

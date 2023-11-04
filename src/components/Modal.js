@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 
 export default function Popup({
   visible,
+  onCloseTeste,
   onClose,
   text,
   isText,
@@ -59,7 +60,7 @@ export default function Popup({
           >
             <Text style={styles.textStyle}>{text}</Text>
           </Pressable>
-          <Pressable style={styles.closeButton} onPress={onClose}>
+          <Pressable style={styles.closeButton} onPress={onCloseTeste}>
             <Icon name="close" size={30} color="#B9901E" />
           </Pressable>
         </View>
