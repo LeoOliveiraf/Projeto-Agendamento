@@ -6,8 +6,6 @@ import BotaoSecundario from "../../components/BotaoSecundario";
 import localizacao from "../../assets/imgs/localizacao.png"
 import whatsapp from "../../assets/imgs/whatsapp.png";
 import instagram from "../../assets/imgs/instagram.png";
-import drawerTeste from "../../routes/drawer.routes";
-import { useEffect } from "react";
 
 export default function HomeC({navigation}) {
   return (
