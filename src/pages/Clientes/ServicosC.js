@@ -6,7 +6,7 @@ import VisuAgendamentoCliente from "../../components/VisuAgendamentoCliente";
 export default function ServicosC() {
   return (
     <SafeAreaView style={Styles.appDefault}>
-      <ScrollView style={{margin: 20}} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
         <LogoSecundaria>Serviços</LogoSecundaria>
           <View style={styles.containerAtivo}>
             <VisuAgendamentoCliente servico={'Barba'} data={'R$ 40,00'} hora={'Duração: 30min'}/>

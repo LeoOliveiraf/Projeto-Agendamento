@@ -15,19 +15,19 @@ export default function LoginB({navigation}) {
   }
   return (
     <View style={Styles.appDefault}>
-    <LogoBarbearia />
-    <Titulos>Login</Titulos>
-    <Inputs text={'Palavra-chave'}/>
-    <Text style={Styles.textInputSenha}>Senha</Text>
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <TextInput
-        secureTextEntry={showPassword} style={Styles.input}
-      />
-      <TouchableOpacity onPress={changeVisibility} style={{position: 'absolute', right: 0, padding: 15, paddingBottom: 45}}>
-        <Icon name={showPassword ? 'eye-slash' : 'eye'} size={25} color="#CECECE" />
-      </TouchableOpacity>
+      <LogoBarbearia />
+      <Titulos>Login</Titulos>
+      <Inputs text={'Palavra-chave'}/>
+      <Text style={Styles.textInputSenha}>Senha</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <TextInput
+          secureTextEntry={showPassword} style={Styles.input}
+        />
+        <TouchableOpacity onPress={changeVisibility} style={{position: 'absolute', right: 0, padding: 15, paddingBottom: 45}}>
+          <Icon name={showPassword ? 'eye-slash' : 'eye'} size={25} color="#CECECE" />
+        </TouchableOpacity>
+      </View>
+      <BotaoEnviar onPress={() => {navigation.navigate('HomeB')}}/>
     </View>
-    <BotaoEnviar onPress={() => {navigation.navigate('HomeB')}}/>
-  </View>
   );
 }

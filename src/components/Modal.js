@@ -3,7 +3,7 @@ import { Modal, View, Text, Pressable, StyleSheet } from "react-native";
 import { TextInput } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 
-export default function Teste({
+export default function Popup({
   visible,
   onClose,
   text,
@@ -11,7 +11,7 @@ export default function Teste({
   isInput,
   textMensagem,
   inputModalService,
-  botaoFechar,
+  inputModalAgendamento,
 }) {
   const [valueInputDuracao, setValueInputDuracao] = useState('')
   return (
@@ -26,21 +26,31 @@ export default function Teste({
           {isInput ? (
             <View>
               <Text style={{ marginTop: 15, fontSize: 17 }}>Nome</Text>
-              <TextInput style={styles.inpuModal} />
+              <TextInput style={styles.inputModal} />
               <Text style={{ fontSize: 17 }}>Celular (com DDD)</Text>
-              <TextInput style={styles.inpuModal} />
+              <TextInput style={styles.inputModal} />
             </View>
           ) : null}
           {inputModalService ? (
             <View>
               <Text style={{ marginTop: 15, fontSize: 17 }}>Nome</Text>
-              <TextInput style={styles.inpuModal} />
+              <TextInput style={styles.inputModal} />
               <Text style={{ fontSize: 17 }}>Valor</Text>
-              <TextInput style={styles.inpuModal} />
+              <TextInput style={styles.inputModal} />
               <Text style={{ fontSize: 17 }}>Duração</Text>
-              <TextInput keyboardType="numeric" value={valueInputDuracao} style={styles.inpuModal} />
+              <TextInput keyboardType="numeric" value={valueInputDuracao} style={styles.inputModal} />
               {/*Usar o useState junto com esse value para manipular o valor*/}
             </View>
+          ) : null}
+          {inputModalAgendamento ? (
+            <View>
+              <Text style={{ marginTop: 15, fontSize: 17 }}>Nome</Text>
+              <TextInput style={styles.inputModal} />
+              <Text style={{ fontSize: 17 }}>Serviço</Text>
+              <TextInput keyboardType="numeric" value={valueInputDuracao} style={styles.inputModal} />
+              <Text style={{ fontSize: 17 }}>Data e Horário</Text>
+              <TextInput style={styles.inputModal} />
+            </View>      
           ) : null}
           {isText ? <Text style={styles.modalText}>{textMensagem}</Text> : null}
           <Pressable
@@ -101,7 +111,7 @@ const styles = StyleSheet.create({
     padding: 5,
     margin: -3,
   },
-  inpuModal: {
+  inputModal: {
     backgroundColor: "#CECECE",
     width: 250,
     height: 37,

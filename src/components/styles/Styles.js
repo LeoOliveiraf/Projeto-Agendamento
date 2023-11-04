@@ -13,15 +13,14 @@ export default StyleSheet.create ({
         fontSize: 36,
         color: '#FFFF',
         fontWeight: '300',
-        marginTop: 35,
+        marginTop: 30,
+        marginBottom: 50,
         justifyContent: 'center',
         textAlign: 'center',
-        marginBottom: 35,
     },
     logoBarbearia: {
-        width: 200,
-        height: 260,
-        resizeMode: 'cover',
+        width: 250,
+        resizeMode: 'stretch',
     },
     button: {
         borderWidth: 2,
@@ -86,7 +85,7 @@ export default StyleSheet.create ({
         color: "#FFFF",
         fontSize: 30,
         marginTop: 10,
-        marginBottom: 30,
+        marginBottom: 10,
     },
     botaoCadastrar: {
         borderRadius: 30,
@@ -97,7 +96,8 @@ export default StyleSheet.create ({
         flexDirection: 'row',
         alignItems: 'center',
         alignSelf: 'flex-start',
-        marginRight: 40
+        marginLeft: 10,
+        marginRight: 40,
     },
     botaoDeletar: {
         borderRadius: 30,

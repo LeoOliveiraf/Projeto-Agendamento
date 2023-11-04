@@ -9,28 +9,64 @@ import Tabela from '../../components/TabelaAgendamentosBarbearia';
 import Modal from '../../components/Modal';
 
 export default function AgendamentosB(props) {
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const handleAgendarPress = () => {
-    setModalVisible(true);
-  };
-
-  const handleModalClose = () => {
-    setModalVisible(false);
-  };
+  const [modalAgendar, setModalAgendar] = useState(false);
+  const [modalDeletar, setModalDeletar] = useState(false);
+  const [modalEditar, setModalEditar] = useState(false);
+  const [modalExcluirUnico, setModalExcluirUnico] = useState(false);
 
   return (
     <SafeAreaView style={Styles.appDefault}>
-      <ScrollView style={{margin: 20}} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
         <LogoSecundaria>Agendamentos</LogoSecundaria>
         <BarraDePesquisa />
-        <View style={{ flexDirection: 'row', marginTop: 40, marginBottom: 30 }}>
-          <BotaoCadastrar text={'Agendar'}/>
-          <BotaoDeletar onPress={handleAgendarPress} text={'Deletar todos'}/>
+        <View style={{ flexDirection: 'row', marginTop: 40, marginBottom: 40 }}>
+          <BotaoCadastrar text={"Agendar"} onPress={() => setModalAgendar(!modalAgendar)}/>
+          <BotaoDeletar text={"Deletar todos"} onPress={() => setModalDeletar(!modalDeletar)}/>
         </View>
-        <Text style={[Styles.textLogoSecundaria, { fontSize: 25, marginBottom: 10, alignSelf: 'flex-start', marginLeft: 30 }]}>Dia 05/10/2023</Text>
-        <Modal visible={modalVisible} onClose={handleModalClose} textMensagem={'Tem certeza que deseja deletar todos os agendamentos?'} isText={true} isInput={false} text={'Deletar todos'}/>
-        <Tabela />
+        <Text style={[Styles.textLogoSecundaria, { fontSize: 25, alignSelf: 'flex-start', marginLeft: 10 }]}>Dia 05/10/2023</Text>
+        <Tabela
+          onPress={() => setModalEditar(!modalEditar)}
+          onPressDeletar={() => setModalExcluirUnico(!modalExcluirUnico)}
+        />
+
+        {/*Modais*/}
+        <Modal
+          isText={false}
+          onClose={() => setModalAgendar(!modalAgendar)}
+          visible={modalAgendar}
+          key={1}
+          text={"Agendar"}
+          inputModalAgendamento={true}
+        />
+
+        <Modal
+          isText={true}
+          onClose={() => setModalDeletar(!modalDeletar)}
+          visible={modalDeletar}
+          key={2}
+          text={"Deletar todos"}
+          textMensagem={"Tem certeza que deseja \n deletar todos os clientes?"}
+          isInput={false}
+        />
+
+        <Modal
+          isText={false}
+          onClose={() => setModalEditar(!modalEditar)}
+          visible={modalEditar}
+          key={3}
+          text={"Editar"}
+          isInput={true}
+        />
+
+        <Modal
+          isText={true}
+          onClose={() => setModalExcluirUnico(!modalExcluirUnico)}
+          visible={modalExcluirUnico}
+          key={4}
+          text={"Deletar"}
+          isInput={false}
+          textMensagem={`Tem certeza que deseja deletar 'Leonardo' da lista de clientes?`} botaoFechar={true}
+        />
       </ScrollView>
     </SafeAreaView>
   )

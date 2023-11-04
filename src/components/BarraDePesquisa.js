@@ -3,7 +3,7 @@ import { View } from "react-native";
 
 export default function BarraDePesquisa(){
     return(
-        <View>
+        <View style={{marginTop: 30}}>
             <SearchBar style={{fontSize: 16}} placeholder="Pesquisar agendamentos" 
                 containerStyle={{width: 330, backgroundColor: 'transparent', 
                                 borderBottomWidth: 0, borderTopColor: 0, marginBottom: -20}} 
