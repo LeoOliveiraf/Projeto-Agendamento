@@ -14,7 +14,7 @@ export default function ServicosB() {
     const [modalExcluirServico, setModalExcluirServ] = useState(false)
     return(
         <SafeAreaView style={Styles.appDefault}>
-            <ScrollView style={{margin: 20}} showsVerticalScrollIndicator={false}>
+            <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
                 <LogoSecundaria>Serviços</LogoSecundaria> 
                 <View style={{flexDirection: 'row', marginTop: 40, marginBottom: 30}}>
                     <BotaoCadastrar text={'Cadastrar'} onPress={() => setModalCadastrarServico(!modalCadastrarServico)}/>

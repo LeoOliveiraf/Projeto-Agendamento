@@ -6,7 +6,7 @@ import VisuAgendamentoCliente from "../../components/VisuAgendamentoCliente";
 export default function AgendamentosC() {
   return (
     <SafeAreaView style={Styles.appDefault}>
-      <ScrollView style={{margin: 20}} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
         <LogoSecundaria>Agendamentos</LogoSecundaria>
         <View>
           <Text style={styles.textStatus}>Ativos</Text>
@@ -36,11 +36,13 @@ const styles = StyleSheet.create({
   containerAtivo: {
     flexDirection: "row",
     flexWrap: 'wrap',
+    marginLeft: 5,
   },
   textStatus: {
     fontSize: 20,
     color: "white",
     marginTop: 20,
-    fontWeight: '500'
+    marginLeft: 20,
+    fontWeight: '300'
   },
 });

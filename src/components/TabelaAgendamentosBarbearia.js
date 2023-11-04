@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { DataTable } from 'react-native-paper';
 
-export default App = () => {
+export default App = ({ onPress, onPressDeletar }) => {
     var agendamentos = [
         {
             id: 1,
@@ -20,7 +20,7 @@ export default App = () => {
     ];
 
     return (
-        <View style={{width: 310, }}>
+        <View style={{ width: 310 }}>
         <DataTable>
             <DataTable.Header style={{ borderBottomColor: '#B9901E'}}>
                 <DataTable.Title textStyle={styles.title}>Nome</DataTable.Title>
@@ -37,9 +37,7 @@ export default App = () => {
                     style={{ borderBottomColor: '#B9901E' }}
                     key={agendamento.id} // you need a unique key per item
                     onPress={() => {
-                    // added to illustrate how you can make the row take the onPress event and do something
-                    console.log(`agendamento selecionado ${agendamento.id}`)
-                }}
+                    }}
                 >
                 <DataTable.Cell textStyle={styles.cell}>
                     {agendamento.nome}
@@ -52,8 +50,18 @@ export default App = () => {
                 </DataTable.Cell>
                 <DataTable.Cell textStyle={styles.cell}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Icon name='pencil'size={20} color='#B9901E' style={{ marginLeft: 10, marginRight: 10}}/>
-                    <Icon name='trash' size={20} color='#767676'/>
+                    <Icon 
+                        name='pencil'
+                        size={20}
+                        color='#B9901E'
+                        style={{ marginLeft: 10, marginRight: 10}}
+                        onPress={onPress}
+                    />
+                    <Icon
+                        name='trash'
+                        size={20}
+                        color='#767676'
+                        onPress={onPressDeletar}/>
                 </View>
                 </DataTable.Cell>
                 </DataTable.Row>

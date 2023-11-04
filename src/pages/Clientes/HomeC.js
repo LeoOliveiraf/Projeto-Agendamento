@@ -6,13 +6,15 @@ import BotaoSecundario from "../../components/BotaoSecundario";
 import localizacao from "../../assets/imgs/localizacao.png"
 import whatsapp from "../../assets/imgs/whatsapp.png";
 import instagram from "../../assets/imgs/instagram.png";
+import drawerTeste from "../../routes/drawer.routes";
+import { useEffect } from "react";
 
 export default function HomeC({navigation}) {
   return (
     <View style={Styles.appDefault}>
       <LogoHome />
       <Titulos>Olá Murilo. {"\n"} Seja bem-vindo!</Titulos>
-      <BotaoSecundario text={'Agendamentos'} onPress={() => {navigation.navigate('AgendamentosC')}} />
+      <BotaoSecundario text={'Agendamentos'} onPress={() => {navigation.navigate('AgendamentosC')}}/>
       <BotaoSecundario text={'Nossos Serviços'} onPress={() => {navigation.navigate('ServicosC')}}/>
 
       <View style={Styles.textContainer}>

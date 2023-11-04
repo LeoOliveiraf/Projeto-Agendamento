@@ -12,9 +12,10 @@ export default function Clientes(props) {
   const [modalDeletar, setModalDeletar] = useState(false);
   const [modalEditar, setModalEditar] = useState(false);
   const [modalExcluirUnico, setModalExcluirUnico] = useState(false);
+  
   return (
       <SafeAreaView style={Styles.appDefault}>
-        <ScrollView style={{margin: 20}} showsVerticalScrollIndicator={false}>
+        <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
           <LogoSecundaria>Clientes</LogoSecundaria>
           <View style={{ flexDirection: "row", marginTop: 40, marginBottom: 30 }}>
             <BotaoCadastrar

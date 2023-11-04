@@ -19,7 +19,7 @@ export default function Perfil() {
   const [modalVisibleDeslogar, setModalVisibleDeslogar] = useState(false);
   return (
     <SafeAreaView style={Styles.appDefault}>
-      <ScrollView style={{margin: 20}} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
         <LogoSecundaria>Perfil</LogoSecundaria>
         <Text style={Styles.textInputConta}>Editar Conta</Text>
         <View style={Styles.containerPerfil}>
