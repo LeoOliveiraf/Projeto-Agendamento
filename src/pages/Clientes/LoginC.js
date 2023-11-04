@@ -5,14 +5,14 @@ import Titulos from '../../components/Titulo';
 import Inputs from '../../components/Inputs';
 import BotaoEnviar from "../../components/BotaoEnviar";
 
-export default function LoginC() {
+export default function LoginC({ navigation }) {
     return(
         <View style={Styles.appDefault}>
             <LogoBarbearia />
             <Titulos>Login</Titulos>
-            <Inputs>Nome</Inputs>
-            <Inputs>Celular (com DDD)</Inputs>
-            <BotaoEnviar />
+            <Inputs text={'Nome'} />
+            <Inputs text={'Celular (com DDD)'} />
+            <BotaoEnviar onPress={() => {navigation.navigate('HomeC')}}/>
         </View>
     )
 }
