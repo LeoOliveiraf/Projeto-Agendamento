@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 export default function App({ onPress, onPressDeletar }) {
   const [data, setData] = useState([]);
-  const URL = "https://jsonplaceholder.typicode.com/todos/";
+  const URL = "GET";
 
   const getClientes = async () => {
     try {
