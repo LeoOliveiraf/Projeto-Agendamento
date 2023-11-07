@@ -2,20 +2,25 @@ import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { DataTable } from "react-native-paper";
+import { useState, useEffect } from "react";
 
-export default App = ({ onPress, onPressDeletar }) => {
-  var clientes = [
-    {
-      id: 1,
-      nome: "Leonardo",
-      telefone: "43 99999-9999",
-    },
-    {
-      id: 2,
-      nome: "Pedro",
-      telefone: "43 11111-1111",
-    },
-  ];
+export default function App({ onPress, onPressDeletar }) {
+  const [data, setData] = useState([]);
+  const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes";
+
+  const getClientes = async () => {
+    try {
+      const response = await fetch(URL);
+      const json = await response.json();
+      setData(json);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getClientes();
+  }, []);
 
   return (
     <View style={{ width: 310 }}>
@@ -27,19 +32,19 @@ export default App = ({ onPress, onPressDeletar }) => {
             Ações
           </DataTable.Title>
         </DataTable.Header>
-        {clientes.map((cliente) => {
-          return (
+        {data.map((item) => (
             <DataTable.Row
               style={{ borderBottomColor: "#B9901E" }}
-              key={cliente.id}
+              key={item.id}
               onPress={() => {
+                // Ação ao pressionar a linha
               }}
             >
               <DataTable.Cell textStyle={styles.cell}>
-                {cliente.nome}
+                {item.nome}
               </DataTable.Cell>
               <DataTable.Cell textStyle={styles.cell}>
-                {cliente.telefone}
+                {item.telefone}
               </DataTable.Cell>
               <DataTable.Cell textStyle={styles.cell}>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -48,23 +53,22 @@ export default App = ({ onPress, onPressDeletar }) => {
                     size={20}
                     color="#B9901E"
                     style={{ marginLeft: 25, marginRight: 10 }}
-                    onPress={onPress}
+                    onPress={() => onPress(item)}
                   />
                   <Icon
                     name="trash"
                     size={20}
                     color="#767676"
-                    onPress={onPressDeletar}
+                    onPress={() => onPressDeletar(item)} 
                   />
                 </View>
               </DataTable.Cell>
             </DataTable.Row>
-          );
-        })}
+          ))}
       </DataTable>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   title: {
