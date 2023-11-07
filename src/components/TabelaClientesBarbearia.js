@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 export default function App({ onPress, onPressDeletar }) {
   const [data, setData] = useState([]);
-  const URL = "GET";
+  const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes";
 
   const getClientes = async () => {
     try {
@@ -41,10 +41,10 @@ export default function App({ onPress, onPressDeletar }) {
               }}
             >
               <DataTable.Cell textStyle={styles.cell}>
-                {item.title}
+                {item.nome}
               </DataTable.Cell>
               <DataTable.Cell textStyle={styles.cell}>
-                {item.id}
+                {item.telefone}
               </DataTable.Cell>
               <DataTable.Cell textStyle={styles.cell}>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>

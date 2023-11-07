@@ -16,9 +16,45 @@ export default function Clientes() {
   const [telefoneCliente, setTelefoneCliente] = useState('');
 
   const setData = () => {
-    console.log(nomeCliente, telefoneCliente + "É O FORÇA NO ECO");
+    console.log(nomeCliente, telefoneCliente)
     setModalCadastrar(!modalCadastrar);
+    doPost();
   };
+
+  const doPost = () => {
+    const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes";
+
+    const options = {
+      method: 'POST',
+      headers: {
+        Aceept:  'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        nome: nomeCliente,
+        telefone: telefoneCliente
+      }) 
+    };
+
+    fetch(URL, options)
+    .then(
+      (response)=>{
+        if(!response.ok){
+          throw new Error('A solicitação via POST falhou!')
+        }
+        return response.json();
+      }
+    ).then(
+      (nomeCliente, telefoneCliente)=> {
+        console.log('Resposta Servidor ', nomeCliente, telefoneCliente)
+      }
+    ).catch(
+      (error)=>{
+        console.log(error)
+      }
+    )
+  }
+
   return (
     <SafeAreaView style={Styles.appDefault}>
       <ScrollView
