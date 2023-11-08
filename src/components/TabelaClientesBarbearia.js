@@ -4,24 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { DataTable } from "react-native-paper";
 import { useState, useEffect } from "react";
 
-export default function App({ onPress, onPressDeletar }) {
-  const [data, setData] = useState([]);
-  const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes";
-
-  const getClientes = async () => {
-    try {
-      const response = await fetch(URL);
-      const json = await response.json();
-      setData(json);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    getClientes();
-  }, []);
-
+export default function App({ onPress, dataClientes, onDelete }) {
   return (
     <View style={{ width: 310 }}>
       <DataTable>
@@ -32,7 +15,7 @@ export default function App({ onPress, onPressDeletar }) {
             Ações
           </DataTable.Title>
         </DataTable.Header>
-        {data.map((item) => (
+        {dataClientes.map((item) => (
             <DataTable.Row
               style={{ borderBottomColor: "#B9901E" }}
               key={item.id}
@@ -59,7 +42,7 @@ export default function App({ onPress, onPressDeletar }) {
                     name="trash"
                     size={20}
                     color="#767676"
-                    onPress={() => onPressDeletar(item)} 
+                    onPress={() => onDelete(item)} 
                   />
                 </View>
               </DataTable.Cell>

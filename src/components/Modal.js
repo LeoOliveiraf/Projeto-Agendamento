@@ -16,7 +16,8 @@ export default function Popup({
   inputNomeCliente,
   inputTelefoneCliente,
   valueNome,
-  valueTelefone
+  valueTelefone,
+  user
 }) {
   const [valueInputDuracao, setValueInputDuracao] = useState('')
   return (
