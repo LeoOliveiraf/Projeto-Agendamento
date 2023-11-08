@@ -17,7 +17,6 @@ export default function Popup({
   inputTelefoneCliente,
   valueNome,
   valueTelefone,
-  user
 }) {
   const [valueInputDuracao, setValueInputDuracao] = useState('')
   return (
@@ -34,7 +33,7 @@ export default function Popup({
               <Text style={{ marginTop: 15, fontSize: 17 }}>Nome</Text>
               <TextInput style={styles.inputModal} onChangeText={inputNomeCliente} value={valueNome}/>
               <Text style={{ fontSize: 17 }}>Celular (com DDD)</Text>
-              <TextInput style={styles.inputModal} onChangeText={inputTelefoneCliente} value={valueTelefone}/>
+              <TextInput style={styles.inputModal} onChangeText={inputTelefoneCliente} value={valueTelefone} />
             </View>
           ) : null}
           {inputModalService ? (
