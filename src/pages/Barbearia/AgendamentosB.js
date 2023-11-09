@@ -19,14 +19,16 @@ export default function AgendamentosB() {
   const [nomeCliente, setNomeCliente] = useState("");
   //const [data, setData] = useState([]);
   const [dataClientes, setDataClientes] = useState([]);
-  const listaServicos = [];
+  const [listaServicos, setListaServicos] = useState([]);
+  const [listaClientes, setListaClientes] = useState([]);
+
   const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/TipoServicoes";
     const getTipoServicoes = async () => {
       try {
         const response = await fetch(URL);
         const json = await response.json();
         //setData(json);
-        listaServicos.push(json);
+        setListaServicos(json);
         console.log(listaServicos)
       } catch (error) {
         console.error(error);
@@ -36,15 +38,12 @@ export default function AgendamentosB() {
       getTipoServicoes();
     }, []);
 
-
-    const listaClientes = [];
     const URLCliente = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes";
     const getClientes = async () => {
       try {
         const response = await fetch(URLCliente);
         const json = await response.json();
-        setDataClientes(json);
-        listaClientes.push(json);
+        setListaClientes(json);
       } catch (error) {
         console.error(error);
       }
@@ -53,12 +52,13 @@ export default function AgendamentosB() {
     useEffect(() => {
       getClientes();
     }, []);
-    
 //AQUI COMEÇA O POST
-let tipoServicoId;
-    const doPost = (listaServicos, listaClientes) => {
+    const doPost = async () => {
       const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/createAgendamento";
-      
+      //Tirando o Id do objeto serviceId e renomeando ele (Desestruturação)
+      const {id: serviceId} = listaServicos.find(servico => servico.nome.toLowerCase().trim() === nomeServico.toLowerCase().trim() );
+      const {id: clienteId} = listaClientes.find(cliente => cliente.nome.toLowerCase().trim() === nomeCliente.toLowerCase().trim() );
+      console.log({serviceId, clienteId});
       const options = {
         method: "POST",
         headers: {
@@ -67,32 +67,16 @@ let tipoServicoId;
         },
         body: JSON.stringify({
           data: dataHora,
-          tipoServicoId: nomeServico,
-          clienteId: nomeCliente,
+          tipoServicoId: serviceId,
+          clienteId: clienteId,
           barbeariaId: 1
         }),
       };
-      
-      console.log('Lista' + listaServicos)
-      const getServicoId = (nomeServico) => {
-        const servicoEncontrado = listaServicos.find(servico => servico.nome === nomeServico);
-        return servicoEncontrado.id;
-      };
-      
-      tipoServicoId = getServicoId(nomeServico);
-      console.log(tipoServicoId);
-      
-      console.log('Nome S' + nomeServico);
-      fetch(URL, options).then((response) => {
-        if (!response.ok) {
-          throw new Error("A solicitação via POST falhou!");
-        }
-        return response.json();
-      });
+     const response =  await fetch(URL, options)
+     const data = await response.json();
+     console.log(data);
     };
     const setData = () => {
-      console.log(nomeServico);
-    console.log(tipoServicoId);
     doPost();
   };
   return (
