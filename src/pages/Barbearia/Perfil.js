@@ -11,12 +11,36 @@ import {
 } from "react-native";
 import Styles from "../../components/styles/Styles";
 import { useState } from "react";
+import { useEffect } from "react";
 import LogoSecundaria from "../../components/LogoSecundaria";
 import Icon from "react-native-vector-icons/AntDesign";
 
 export default function Perfil() {
   const [modalVisibleSalvar, setModalVisibleSalvar] = useState(false);
   const [modalVisibleDeslogar, setModalVisibleDeslogar] = useState(false);
+  const [dataClientes, setDataCAdministrador] = useState([]);
+
+
+  const getAdministrador = async () => {
+    try {
+      const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Administradors";
+      const options = {
+        method: 'GET'
+      };
+      const response = await fetch(URL,options);
+      const json = await response.json();
+      setDataCAdministrador(json);
+      console.log(dataClientes)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getAdministrador();
+  }, []);
+
+
+
   return (
     <SafeAreaView style={Styles.appDefault}>
       <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
