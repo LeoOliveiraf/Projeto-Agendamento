@@ -166,6 +166,7 @@ export default function Clientes() {
           dataClientes={dataClientes}
           onDelete={openModalDelete}
           onEditi={openModalEditi}
+          
         />
         <Modal
           isText={false}
@@ -176,6 +177,8 @@ export default function Clientes() {
           isInput={true}
           inputNomeCliente={setNomeCliente}
           inputTelefoneCliente={setTelefoneCliente}
+          valueNome={nomeCliente}
+          valueTelefone={telefoneCliente}
         />
         <Modal
           isText={true}

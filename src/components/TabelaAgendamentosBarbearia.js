@@ -3,21 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { DataTable } from 'react-native-paper';
 
-export default App = ({ onPress, onPressDeletar }) => {
-    var agendamentos = [
-        {
-            id: 1,
-            nome: 'Leonardo',
-            horario: '13h20',
-            servico: 'Corte'
-        },
-        {
-            id: 2,
-            nome: 'Pedro',
-            horario: '9h30',
-            servico: 'Sobrancelha'
-        },
-    ];
+export default App = ({ dataClientes ,onPress, onPressDeletar }) => {
 
     return (
         <View style={{ width: 310 }}>
@@ -31,7 +17,7 @@ export default App = ({ onPress, onPressDeletar }) => {
                 <DataTable.Title style={{marginLeft: 5}} textStyle={styles.title}>Ações</DataTable.Title>
             </DataTable.Header>
             {
-            agendamentos.map(agendamento => {
+            dataClientes.map(agendamento => {
             return (
                 <DataTable.Row 
                     style={{ borderBottomColor: '#B9901E' }}

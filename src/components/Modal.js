@@ -17,6 +17,12 @@ export default function Popup({
   inputTelefoneCliente,
   valueNome,
   valueTelefone,
+  inputNome,
+  valueNomeAgendamentoCliente,
+  inputNomeServico,
+  valueNomeServico,
+  inputDataHora,
+  valueDataHora
 }) {
   const [valueInputDuracao, setValueInputDuracao] = useState('')
   return (
@@ -50,11 +56,11 @@ export default function Popup({
           {inputModalAgendamento ? (
             <View>
               <Text style={{ marginTop: 15, fontSize: 17 }}>Nome</Text>
-              <TextInput style={styles.inputModal} />
+              <TextInput style={styles.inputModal} onChangeText={inputNome} value={valueNomeAgendamentoCliente}/>
               <Text style={{ fontSize: 17 }}>Serviço</Text>
-              <TextInput keyboardType="numeric" value={valueInputDuracao} style={styles.inputModal} />
+              <TextInput style={styles.inputModal} onChangeText={inputNomeServico} value={valueNomeServico}/>
               <Text style={{ fontSize: 17 }}>Data e Horário</Text>
-              <TextInput style={styles.inputModal} />
+              <TextInput style={styles.inputModal} onChangeText={inputDataHora} value={valueDataHora}/>
             </View>      
           ) : null}
           {isText ? <Text style={styles.modalText}>{textMensagem}</Text> : null}
