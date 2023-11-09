@@ -11,26 +11,33 @@ import { useEffect } from "react";
 export default function Clientes() {
   const [modalCadastrar, setModalCadastrar] = useState(false);
   const [modalDeletar, setModalDeletar] = useState(false);
-  const [modalEditar, setModalEditar] = useState(false);
-  const [modalExcluirUnico, setModalExcluirUnico] = useState(false);
-  const [nomeCliente, setNomeCliente] = useState('');
-  const [telefoneCliente, setTelefoneCliente] = useState('');
+  const [nomeCliente, setNomeCliente] = useState("");
+  const [telefoneCliente, setTelefoneCliente] = useState("");
   const [dataClientes, setDataClientes] = useState([]);
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
+  const [modalEditi, setModalEditi] = useState({ data: {}, open: false });
 
+  const openModalEditi = (item) => {
+    setModalEditi({ open: true, data: item });
+  };
+
+  const openModalDelete = (item) => {
+    setModalDelete({ open: true, data: item });
+  };
+  //AQUI COMEÇA O DELETE
   const userDeletar = async (item) => {
-    const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes/" + item.id;
-  
+    const URL =
+      "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes/" +
+      item.id;
+
     const options = {
-      method: 'DELETE'
+      method: "DELETE",
     };
-  
+
     try {
       const response = await fetch(URL, options);
       if (response.ok) {
         console.log("Cliente excluído com sucesso!");
-      } else {
-        console.error("Erro ao excluir o cliente. Status:", response.status);
       }
     } catch (error) {
       console.error("Erro na solicitação:", error);
@@ -39,8 +46,8 @@ export default function Clientes() {
       getClientes();
     }
   };
+  //AQUI COMEÇA O GET
   const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes";
-
   const getClientes = async () => {
     try {
       const response = await fetch(URL);
@@ -56,49 +63,67 @@ export default function Clientes() {
   }, []);
 
   const setData = () => {
-    console.log(nomeCliente, telefoneCliente)
+    console.log(nomeCliente, telefoneCliente);
     setModalCadastrar(!modalCadastrar);
     doPost();
   };
- 
+
+  //AQUI COMEÇA METODO POST
   const doPost = () => {
-    const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes";
+    const URL =
+      "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes";
 
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        Aceept:  'application/json',
-        'Content-Type': 'application/json',
+        Aceept: "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         nome: nomeCliente,
-        telefone: telefoneCliente
-      }) 
+        telefone: telefoneCliente,
+      }),
     };
 
-    fetch(URL, options)
-    .then(
-      (response)=>{
-        if(!response.ok){
-          throw new Error('A solicitação via POST falhou!')
-        }
-        return response.json();
+    fetch(URL, options).then((response) => {
+      if (!response.ok) {
+        throw new Error("A solicitação via POST falhou!");
       }
-    ).then(
-      (nomeCliente, telefoneCliente)=> {
-        console.log('Resposta Servidor ', nomeCliente, telefoneCliente)
-      }
-    ).catch(
-      (error)=>{
-        console.log(error)
-      }
-    )
-  }
+      return response.json();
+    });
+  };
 
-  openModalDelete = (item) => {
-    setModalDelete({ open: true, data: item });
-  }
+  //AQUI COMEÇA METODO PUT
+  const doPut = async (item) => {
+    const URL = `https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes/${item.id}`;
+    console.log("PALMEIRAS " + nomeCliente, telefoneCliente);
+    console.log(URL);
+    setNomeCliente(nomeCliente);
+    setTelefoneCliente(telefoneCliente);
 
+    const options = {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: item.id,
+        nome: nomeCliente,
+        telefone: telefoneCliente,
+      }),
+    };
+    try {
+      await fetch(URL, options);
+      console.log("Deu Certo " + options.body);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setModalEditi({ data: {}, open: false });
+      getClientes();
+      console.log("Entrou No finally");
+    }
+  };
   return (
     <SafeAreaView style={Styles.appDefault}>
       <ScrollView
@@ -115,7 +140,7 @@ export default function Clientes() {
             text={"Deletar todos"}
             onPress={() => setModalDeletar(!modalDeletar)}
           />
-          <Modal 
+          <Modal
             isText={false}
             visible={modalCadastrar}
             key={1}
@@ -138,18 +163,22 @@ export default function Clientes() {
           />
         </View>
         <TabelaClientesBarbearia
-          onPress={() => setModalEditar(!modalEditar)}
-          onPressDeletar={() => setModalExcluirUnico(!modalExcluirUnico)}
           dataClientes={dataClientes}
           onDelete={openModalDelete}
+          onEditi={openModalEditi}
+          
         />
         <Modal
           isText={false}
-          onClose={() => setModalEditar(!modalEditar)}
-          visible={modalEditar}
+          onClose={() => doPut(modalEditi.data)}
+          visible={modalEditi.open}
           key={3}
           text={"Editar"}
           isInput={true}
+          inputNomeCliente={setNomeCliente}
+          inputTelefoneCliente={setTelefoneCliente}
+          valueNome={nomeCliente}
+          valueTelefone={telefoneCliente}
         />
         <Modal
           isText={true}
@@ -158,8 +187,7 @@ export default function Clientes() {
           key={4}
           text={"Deletar"}
           isInput={false}
-          textMensagem={`Tem certeza que deseja deletar 'Leonardo' da lista de clientes?`}
-
+          textMensagem={`Tem certeza que deseja deletar ${modalDelete.data.nome} da lista de clientes?`}
         />
       </ScrollView>
     </SafeAreaView>

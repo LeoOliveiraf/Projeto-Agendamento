@@ -2,9 +2,9 @@ import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { DataTable } from "react-native-paper";
-import { useState, useEffect } from "react";
 
-export default function App({ onPress, dataClientes, onDelete }) {
+
+export default function App({ dataClientes, onDelete, onEditi }) {
   return (
     <View style={{ width: 310 }}>
       <DataTable>
@@ -36,7 +36,7 @@ export default function App({ onPress, dataClientes, onDelete }) {
                     size={20}
                     color="#B9901E"
                     style={{ marginLeft: 25, marginRight: 10 }}
-                    onPress={() => onPress(item)}
+                    onPress={() => onEditi(item)}
                   />
                   <Icon
                     name="trash"
