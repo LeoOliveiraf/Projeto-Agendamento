@@ -63,9 +63,8 @@ export default function Clientes() {
   }, []);
 
   const setData = () => {
-    console.log(nomeCliente, telefoneCliente);
-    setModalCadastrar(!modalCadastrar);
     doPost();
+    setModalCadastrar(!modalCadastrar);
   };
 
   //AQUI COMEÇA METODO POST
@@ -96,8 +95,6 @@ export default function Clientes() {
   //AQUI COMEÇA METODO PUT
   const doPut = async (item) => {
     const URL = `https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes/${item.id}`;
-    console.log("PALMEIRAS " + nomeCliente, telefoneCliente);
-    console.log(URL);
     setNomeCliente(nomeCliente);
     setTelefoneCliente(telefoneCliente);
 
