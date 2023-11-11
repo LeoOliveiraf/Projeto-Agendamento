@@ -118,7 +118,6 @@ export default function Clientes() {
     } finally {
       setModalEditi({ data: {}, open: false });
       getClientes();
-      console.log("Entrou No finally");
     }
   };
   return (

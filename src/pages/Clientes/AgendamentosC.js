@@ -15,14 +15,6 @@ export default function AgendamentosC() {
             <VisuAgendamentoCliente servico={'Barba'} data={'Data: 05/10/2023'} hora={'Horário: 15h30'}/>
             <VisuAgendamentoCliente servico={'Barba'} data={'Data: 05/10/2023'} hora={'Horário: 15h30'}/>
           </View>
-          <Text style={styles.textStatus}>Finalizados</Text>
-          <View style={styles.containerAtivo}>
-            <VisuAgendamentoCliente servico={'Barba'} data={'Data: 05/10/2023'} hora={'Horário: 15h30'}/>
-          </View>
-          <Text style={styles.textStatus}>Cancelados</Text>
-          <View style={styles.containerAtivo}>
-            <VisuAgendamentoCliente servico={'Barba'} data={'Data: 05/10/2023'} hora={'Horário: 15h30'}/>
-          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
