@@ -16,107 +16,145 @@ export default function AgendamentosB() {
   const [dataAgendamento, setDataAgendamento] = useState([]);
   const [listaServicos, setListaServicos] = useState([]);
   const [listaClientes, setListaClientes] = useState([]);
-  const [modalEditar, setModalEditar] = useState("");
+  const [modalEditar, setModalEditar] = useState({ data: {}, open: false });
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
 
-  let numberKeyDeletar;
-  let numberKeyAgendamento;
-  let numberKeyEditar;
-
+  //Carregando dados - GET Serviços
   const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/TipoServicoes";
-    const getTipoServicoes = async () => {
-      try {
-        const response = await fetch(URL);
-        const json = await response.json();
-        //setData(json);
-        setListaServicos(json);
-        console.log(listaServicos)
-      } catch (error) {
-        console.error(error);
-      }
+  const getTipoServicoes = async () => {
+    try {
+      const response = await fetch(URL);
+      const json = await response.json();
+      //setData(json);
+      setListaServicos(json);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getTipoServicoes();
+  }, []);
+
+  //Carregando dados - GET Clientes
+  const URLCliente = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes";
+  const getClientes = async () => {
+    try {
+      const response = await fetch(URLCliente);
+      const json = await response.json();
+      setListaClientes(json);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getClientes();
+  }, []);
+
+  //Começando método DELETE
+  const openModalDelete = (item) => {
+    setModalDelete({ open: true, data: item });
+  };
+  const userDeletar = async (item) => {
+    const URLDeletar = 'https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/' + item.id;
+    const options = {
+      method: "DELETE",
     };
-    useEffect(() => {
-      getTipoServicoes();
-    }, []);
 
-    const URLCliente = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes";
-    const getClientes = async () => {
-      try {
-        const response = await fetch(URLCliente);
-        const json = await response.json();
-        setListaClientes(json);
-      } catch (error) {
-        console.error(error);
+    try {
+      const response = await fetch(URLDeletar, options);
+      if (response.ok) {
+        console.log("item excluído com sucesso!");
       }
-    };
-    useEffect(() => {
-      getClientes();
-    }, []);
-
- //AQUI COMEÇA O DELETE
- const openModalDelete = (item) => {
-  setModalDelete({ open: true, data: item });
-};
- const userDeletar = async (item) => {
-  console.log(item.id)
-  const URLDeletar = 'https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/' + item.id;
-
-  const options = {
-    method: "DELETE",
+    } catch (error) {
+      console.error("Erro na solicitação:", error);
+    } finally {
+      setModalDelete({ data: {}, open: false });
+      doGetAgendamento();
+    }
   };
 
-  try {
-    const response = await fetch(URLDeletar, options);
-    if (response.ok) {
-      numberKeyDeletar += 1;
-      console.log("item excluído com sucesso!");
-    }
-  } catch (error) {
-    console.error("Erro na solicitação:", error);
-  } finally {
-    setModalDelete({ data: {}, open: false });
-    doGetAgendamento();
-  }
-};
 
+  //Começando método POST
+  const doPost = async () => {
+    const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/createAgendamento";
+    //Tirando o Id do objeto serviceId e renomeando ele (Desestruturação)
+    const {id: serviceId} = listaServicos.find(servico => servico.nome.toLowerCase().trim() === nomeServico.toLowerCase().trim() );
+    const {id: clienteId} = listaClientes.find(cliente => cliente.nome.toLowerCase().trim() === nomeCliente.toLowerCase().trim() );
+    console.log(serviceId, clienteId);
+    const options = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        data: dataHora,
+        tipoServicoId: serviceId,
+        clienteId: clienteId,
+        barbeariaId: 1
+      }),
+    };
+    const response =  await fetch(URL, options)
+    const data = await response.json();
+    console.log(data);
+  };
+  const setData = () => {
+    doPost();
+    setModalAgendar(!modalAgendar);
+  };
+  
 
-//AQUI COMEÇA O POST
-    const doPost = async () => {
-      const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/createAgendamento";
-      //Tirando o Id do objeto serviceId e renomeando ele (Desestruturação)
-      const {id: serviceId} = listaServicos.find(servico => servico.nome.toLowerCase().trim() === nomeServico.toLowerCase().trim() );
-      const {id: clienteId} = listaClientes.find(cliente => cliente.nome.toLowerCase().trim() === nomeCliente.toLowerCase().trim() );
-      console.log(serviceId, clienteId);
-      const options = {
-        method: "POST",
-        headers: {
-          Aceept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          data: dataHora,
-          tipoServicoId: serviceId,
-          clienteId: clienteId,
-          barbeariaId: 1
-        }),
-      };
-     const response =  await fetch(URL, options)
-     const data = await response.json();
-     console.log(data);
-    };
-    const setData = () => {
-      doPost();
-      setModalAgendar(!modalAgendar);
-    };
+  // Começando o método PUT
+  const openModalEditar = (item) => {
+    setModalEditar({open: true, data: item});
+  };
+  const userEditar = async (item) => {
+    const {id: serviceId} = listaServicos.find(servico => servico.nome.toLowerCase().trim() === nomeServico.toLowerCase().trim() );
+    const {id: clienteId} = listaClientes.find(cliente => cliente.nome.toLowerCase().trim() === nomeCliente.toLowerCase().trim() );
     
-  //GET Agendamentos
+    console.log(serviceId);
+    console.log(clienteId);
+
+    const URLEditar = 'https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/' + item.id;
+    setDataHora(dataHora);
+    setNomeCliente(nomeCliente);
+    setNomeServico(nomeServico);
+    const options = {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: item.id,
+        data: dataHora,
+        tipoServicoId: serviceId,
+        clienteId: clienteId,
+        barbeariaId: 1
+      }),
+    };
+    console.log(options.body);
+    try {
+      const response = await fetch(URLEditar, options);
+      if(response.ok){
+        console.log("Item editado com sucesso");
+      }
+    } catch (error) {
+      console.log("Erro na solicitação: ", error);
+    } finally {
+      setModalEditar({data: {}, open: false});
+      doGetAgendamento();
+    }
+  }
+
+
+  //Começando método GET
   const URLAgendamento = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/listaAgendamento";
   const doGetAgendamento = async () => {
     try {
       const response = await fetch(URLAgendamento);
       const json = await response.json();
       setDataAgendamento(json);
-      numberKeyAgendamento += 1;
     } catch (error) {
       console.log(error);
     }
@@ -125,6 +163,8 @@ export default function AgendamentosB() {
     doGetAgendamento();
   }, []);
 
+
+  //Tela + Modais
   return (
     <SafeAreaView style={Styles.appDefault}>
       <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
@@ -138,14 +178,14 @@ export default function AgendamentosB() {
         <TabelaAgendamentosBarbearia 
           dataAgendamento={dataAgendamento}
           onDelete={openModalDelete}
+          onEditi={openModalEditar}
         />
 
-        {/*Modais*/}
+        {/*Modal Agendar*/}
         <Modal
           isText={false}
           onClose={() => setData()}
           visible={modalAgendar}
-          key={numberKeyAgendamento}
           text={"Agendar"}
           inputModalAgendamento={true}
           inputNome={setNomeCliente}
@@ -156,29 +196,36 @@ export default function AgendamentosB() {
           valueNomeServico={nomeServico}
         />
 
+        {/*Modal Deletar todos*/}
         <Modal
           isText={true}
           visible={false}
-          key={2}
           text={"Deletar todos"}
           textMensagem={"Tem certeza que deseja \n deletar todos os clientes?"}
           isInput={false}
         />
 
+        {/*Modal Editar*/}
         <Modal
           isText={false}
-          onClose={() => setModalEditar(!modalEditar)}
-          visible={modalEditar}
-          key={15}
+          onClose={() => userEditar(modalEditar.data)}
+          visible={modalEditar.open}
           text={"Editar"}
-          isInput={true}
+          key={16}
+          valueNomeAgendamentoCliente={nomeCliente}
+          valueNomeServico={nomeServico}
+          valueDataHora={dataHora}
+          inputNome={setNomeCliente}
+          inputNomeServico={setNomeServico}
+          inputDataHora={setDataHora}
+          inputModalAgendamento={true}
         />
 
+        {/*Modal Deletar*/}
         <Modal
           isText={true}
           onClose={() => userDeletar(modalDelete.data)}
           visible={modalDelete.open}
-          key={numberKeyDeletar}
           text={"Deletar"}
           isInput={false}
           textMensagem={`Tem certeza que deseja deletar esse item?`} 

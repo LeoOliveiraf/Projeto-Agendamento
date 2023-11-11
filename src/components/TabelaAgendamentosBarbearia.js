@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { DataTable } from 'react-native-paper';
 
-export default App = ({ dataAgendamento ,onDelete, onEditi }) => {
+export default App = ({ dataAgendamento, onDelete, onEditi }) => {
 
     return (
         <View style={{ width: 310 }}>
@@ -39,6 +39,7 @@ export default App = ({ dataAgendamento ,onDelete, onEditi }) => {
                         size={20}
                         color='#B9901E'
                         style={{ marginLeft: 10, marginRight: 10}}
+                        onPress={() => onEditi(item)}
                         
                     />
                     <Icon
