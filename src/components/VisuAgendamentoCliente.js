@@ -4,8 +4,8 @@ export default function VisuAgendamentoCliente({servico, data, hora}) {
     return (
       <View style={styles.visualizaInfo}>
         <Text style={styles.text}>{servico}</Text>
-        <Text style={styles.textValor}>{data}</Text>
-        <Text style={styles.textDuracao}>{hora}</Text>
+        <Text style={styles.textValor}>Data: {data}</Text>
+        <Text style={styles.textDuracao}>Horario: {hora}</Text>
       </View>
     )
 }
