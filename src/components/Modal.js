@@ -22,9 +22,12 @@ export default function Popup({
   inputNomeServico,
   valueNomeServico,
   inputDataHora,
-  valueDataHora
+  valueDataHora,
+  inputValor,
+  valueValor,
+  inputDuracao,
+  valueDuracao,
 }) {
-  const [valueInputDuracao, setValueInputDuracao] = useState('')
   return (
     <Modal
       animationType="slide"
@@ -45,11 +48,11 @@ export default function Popup({
           {inputModalService ? (
             <View>
               <Text style={{ marginTop: 15, fontSize: 17 }}>Nome</Text>
-              <TextInput style={styles.inputModal} />
+              <TextInput style={styles.inputModal} onChangeText={inputNomeServico} value={valueNomeServico}/>
               <Text style={{ fontSize: 17 }}>Valor</Text>
-              <TextInput style={styles.inputModal} />
+              <TextInput style={styles.inputModal} onChangeText={inputValor} value={valueValor}/>
               <Text style={{ fontSize: 17 }}>Duração</Text>
-              <TextInput keyboardType="numeric" value={valueInputDuracao} style={styles.inputModal} />
+              <TextInput style={styles.inputModal} keyboardType="numeric" onChangeText={inputDuracao} value={valueDuracao}/>
               {/*Usar o useState junto com esse value para manipular o valor*/}
             </View>
           ) : null}
@@ -68,7 +71,7 @@ export default function Popup({
             style={[styles.button, styles.buttonClose]}
             onPress={onClose}
           >
-            <Text style={styles.textStyle}>{text}</Text>
+          <Text style={styles.textStyle}>{text}</Text>
           </Pressable>
           <Pressable style={styles.closeButton} onPress={onCloseTeste}>
             <Icon name="close" size={30} color="#B9901E" />
