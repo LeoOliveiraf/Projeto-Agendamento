@@ -6,30 +6,39 @@ import { DataTable } from "react-native-paper";
 
 export default function App({ dataClientes, onDelete, onEditi }) {
   return (
-    <View style={{ width: 310 }}>
+    <View style={{ width: 330 }}>
       <DataTable>
         <DataTable.Header style={{ borderBottomColor: "#B9901E" }}>
-          <DataTable.Title textStyle={styles.title}>Nome</DataTable.Title>
-          <DataTable.Title textStyle={styles.title}>Telefone</DataTable.Title>
-          <DataTable.Title style={{ marginLeft: 5 }} textStyle={styles.title}>
-            Ações
-          </DataTable.Title>
+          <View style={{width:110}}>
+            <DataTable.Title textStyle={[styles.title, {marginLeft: 15}]}>Nome</DataTable.Title>
+          </View>
+          <View style={{width:110, marginLeft: 5}}>
+            <DataTable.Title textStyle={styles.title}>Telefone</DataTable.Title>
+          </View>
+          <View style={{width:110}}>
+            <DataTable.Title style={{ marginLeft: 5 }} textStyle={styles.title}>Ações</DataTable.Title>
+          </View>
         </DataTable.Header>
         {dataClientes.map((item) => (
-            <DataTable.Row
-              style={{ borderBottomColor: "#B9901E" }}
-              key={item.id}
-              onPress={() => {
-                // Ação ao pressionar a linha
-              }}
-            >
-              <DataTable.Cell textStyle={styles.cell}>
+          <DataTable.Row
+            style={{ borderBottomColor: "#B9901E" }}
+            key={item.id}
+            onPress={() => {
+              // Ação ao pressionar a linha
+            }}
+          > 
+            <View style={{width:110}}>
+              <DataTable.Cell textStyle={[styles.cell, {marginLeft: 10}]}>
                 {item.nome}
               </DataTable.Cell>
-              <DataTable.Cell textStyle={styles.cell}>
+            </View>
+            <View style={{width:110}}>
+              <DataTable.Cell textStyle={[styles.cell, {marginLeft: 25}]}>
                 {item.telefone}
               </DataTable.Cell>
-              <DataTable.Cell textStyle={styles.cell}>
+            </View>
+            <View style={{width:110}}>
+              <DataTable.Cell textStyle={[styles.cell, {marginRight: 0}]}>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Icon
                     name="pencil"
@@ -46,8 +55,9 @@ export default function App({ dataClientes, onDelete, onEditi }) {
                   />
                 </View>
               </DataTable.Cell>
-            </DataTable.Row>
-          ))}
+            </View>
+          </DataTable.Row>
+        ))}
       </DataTable>
     </View>
   );
@@ -58,11 +68,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#fff",
     fontWeight: "bold",
-    marginStart: 25,
+    marginStart: 20,
   },
   cell: {
     fontSize: 14,
     color: "#CECECE",
-    marginStart: 25,
+   
   },
 });

@@ -55,7 +55,7 @@ export default function AgendamentosB() {
     setModalDelete({ open: true, data: item });
   };
   const userDeletar = async (item) => {
-    const URLDeletar = 'https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/' + item.id;
+    const URLDeletar = `https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/${item.id}`;
     const options = {
       method: "DELETE",
     };
@@ -111,14 +111,12 @@ export default function AgendamentosB() {
   const userEditar = async (item) => {
     const {id: serviceId} = listaServicos.find(servico => servico.nome.toLowerCase().trim() === nomeServico.toLowerCase().trim() );
     const {id: clienteId} = listaClientes.find(cliente => cliente.nome.toLowerCase().trim() === nomeCliente.toLowerCase().trim() );
-    
-    console.log(serviceId);
-    console.log(clienteId);
 
-    const URLEditar = 'https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/' + item.id;
     setDataHora(dataHora);
     setNomeCliente(nomeCliente);
     setNomeServico(nomeServico);
+    
+    const URL = `https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/${item.id}`;
     const options = {
       method: "PUT",
       headers: {
@@ -133,12 +131,10 @@ export default function AgendamentosB() {
         barbeariaId: 1
       }),
     };
-    console.log(options.body);
     try {
-      const response = await fetch(URLEditar, options);
-      if(response.ok){
+      await fetch(URL, options);
+        console.log("Deu certo ", options.body);
         console.log("Item editado com sucesso");
-      }
     } catch (error) {
       console.log("Erro na solicitação: ", error);
     } finally {
@@ -164,7 +160,7 @@ export default function AgendamentosB() {
   }, []);
 
 
-  //Tela + Modais
+  //Tela + Modals
   return (
     <SafeAreaView style={Styles.appDefault}>
       <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
@@ -183,6 +179,7 @@ export default function AgendamentosB() {
 
         {/*Modal Agendar*/}
         <Modal
+          key={5}
           isText={false}
           onClose={() => setData()}
           visible={modalAgendar}
@@ -198,6 +195,7 @@ export default function AgendamentosB() {
 
         {/*Modal Deletar todos*/}
         <Modal
+          key={6}
           isText={true}
           visible={false}
           text={"Deletar todos"}
@@ -207,11 +205,11 @@ export default function AgendamentosB() {
 
         {/*Modal Editar*/}
         <Modal
+          key={7}
           isText={false}
           onClose={() => userEditar(modalEditar.data)}
           visible={modalEditar.open}
           text={"Editar"}
-          key={16}
           valueNomeAgendamentoCliente={nomeCliente}
           valueNomeServico={nomeServico}
           valueDataHora={dataHora}
@@ -223,6 +221,7 @@ export default function AgendamentosB() {
 
         {/*Modal Deletar*/}
         <Modal
+          key={8}
           isText={true}
           onClose={() => userDeletar(modalDelete.data)}
           visible={modalDelete.open}
