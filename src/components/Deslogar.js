@@ -1,6 +1,6 @@
 import Modal from '../components/Modal'
 
-export default function Deslogar({navigation}) {
+export default function Deslogar({navigation, redirect}) {
     const handleLogout = () => {
         navigation.navigate('GetStarted')
     }
