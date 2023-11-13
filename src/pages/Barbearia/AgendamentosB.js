@@ -80,7 +80,6 @@ export default function AgendamentosB() {
     //Tirando o Id do objeto serviceId e renomeando ele (Desestruturação)
     const {id: serviceId} = listaServicos.find(servico => servico.nome.toLowerCase().trim() === nomeServico.toLowerCase().trim() );
     const {id: clienteId} = listaClientes.find(cliente => cliente.nome.toLowerCase().trim() === nomeCliente.toLowerCase().trim() );
-    console.log(serviceId, clienteId);
     const options = {
       method: "POST",
       headers: {

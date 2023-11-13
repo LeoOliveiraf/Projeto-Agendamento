@@ -4,7 +4,7 @@ export default function VisuAgendamentoCliente({servico, data, hora}) {
     return (
       <View style={styles.visualizaInfo}>
         <Text style={styles.text}>{servico}</Text>
-        <Text style={styles.textValor}>{data}</Text>
+        <Text style={styles.textDuracao}>{data}</Text>
         <Text style={styles.textDuracao}>{hora}</Text>
       </View>
     )
@@ -13,7 +13,6 @@ export default function VisuAgendamentoCliente({servico, data, hora}) {
 const styles = StyleSheet.create({
 visualizaInfo: {
     backgroundColor: '#fafafa',
-    width: 130,
     height: 160,
     borderRadius: 20,
     borderWidth: 3,
@@ -25,14 +24,6 @@ visualizaInfo: {
   text: {
     fontSize: 24,
     color: 'black',
-    textAlign: 'center',
-    marginTop: -15,
-    marginBottom: 15
-  },
-  textValor: {
-    fontSize: 20,
-    color: 'black',
-    fontWeight: '500',
     textAlign: 'center',
   },
   textDuracao:{

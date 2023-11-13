@@ -6,7 +6,7 @@ export default function Deslogar({navigation}) {
     }
 
     const goToDashboard = () => {
-        navigation.navigate('HomeC')
+        navigation.navigate()
     }
     return (
         <Modal
@@ -18,7 +18,6 @@ export default function Deslogar({navigation}) {
         text={"Deslogar"}
         textMensagem={"Tem certeza que desejar deslogar ?"}
         isInput={false}
-
         />
     );
 }

@@ -14,7 +14,6 @@ import AgendamentosB from "../pages/Barbearia/AgendamentosB";
 import ServicosB from "../pages/Barbearia/ServicosB";
 import Clientes from "../pages/Barbearia/Clientes";
 import Perfil from "../pages/Barbearia/Perfil";
-import { Text } from "react-native";
 import Deslogar from "../components/Deslogar";
 
 const Drawer = createDrawerNavigator();
@@ -36,6 +35,7 @@ const BarbeariaDrawer = () => {
       <Drawer.Screen name="Servicos" component={ServicosB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
       <Drawer.Screen name="Clientes" component={Clientes} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
       <Drawer.Screen name="Perfil" component={Perfil} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
+      <Drawer.Screen name="Deslogar" component={Deslogar} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}} />
     </Drawer.Navigator>
   );
 };
