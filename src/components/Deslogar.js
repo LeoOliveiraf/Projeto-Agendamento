@@ -6,7 +6,7 @@ export default function Deslogar({navigation}) {
     }
 
     const goToDashboard = () => {
-        navigation.navigate()
+        navigation.goBack();
     }
     return (
         <Modal
@@ -20,4 +20,4 @@ export default function Deslogar({navigation}) {
         isInput={false}
         />
     );
-}
+}   

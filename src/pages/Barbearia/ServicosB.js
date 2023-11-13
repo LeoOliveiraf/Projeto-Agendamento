@@ -139,7 +139,7 @@ export default function ServicosC() {
 
         {/*Modal Cadastrar*/}
         <Modal
-            key={8}
+            key={1}
             isText={false}
             visible={modalCadastrar}
             text={"Cadastrar"}
@@ -155,7 +155,7 @@ export default function ServicosC() {
 
         {/*Modal Deletar*/}
         <Modal
-            key={9}
+            key={2}
             isText={true}
             onClose={() => servicoDeletar(modalDelete.data)}
             visible={modalDelete.open}
@@ -165,7 +165,7 @@ export default function ServicosC() {
 
         {/*Modal Editar*/}
         <Modal
-            key={10}
+            key={3}
             isText={false}
             onClose={() => doPut(modalEdit.data)}
             visible={modalEdit.open}

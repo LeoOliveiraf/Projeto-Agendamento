@@ -8,7 +8,7 @@ import BotaoDeletar from '../../components/BotaoDeletar';
 import Modal from '../../components/Modal';
 import TabelaAgendamentosBarbearia from '../../components/TabelaAgendamentosBarbearia';
 
-export default function AgendamentosB() {
+export default function AgendamentosB({navigation}) {
   const [modalAgendar, setModalAgendar] = useState(false);
   const [nomeServico, setNomeServico] = useState("");
   const [dataHora, setDataHora] = useState("");
@@ -19,6 +19,9 @@ export default function AgendamentosB() {
   const [modalEditar, setModalEditar] = useState({ data: {}, open: false });
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
 
+  const goToDashboard = () => {
+    navigation.goBack();
+  }
   //Carregando dados - GET Serviços
   const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/TipoServicoes";
   const getTipoServicoes = async () => {
@@ -178,7 +181,7 @@ export default function AgendamentosB() {
 
         {/*Modal Agendar*/}
         <Modal
-          key={5}
+          key={1}
           isText={false}
           onClose={() => setData()}
           visible={modalAgendar}
@@ -190,21 +193,23 @@ export default function AgendamentosB() {
           inputDataHora={setDataHora}
           inputNomeServico={setNomeServico}
           valueNomeServico={nomeServico}
+          onCloseTeste={goToDashboard}
         />
 
         {/*Modal Deletar todos*/}
         <Modal
-          key={6}
+          key={2}
           isText={true}
           visible={false}
           text={"Deletar todos"}
           textMensagem={"Tem certeza que deseja \n deletar todos os clientes?"}
           isInput={false}
+          onCloseTeste={goToDashboard}
         />
 
         {/*Modal Editar*/}
         <Modal
-          key={7}
+          key={3}
           isText={false}
           onClose={() => userEditar(modalEditar.data)}
           visible={modalEditar.open}
@@ -216,17 +221,19 @@ export default function AgendamentosB() {
           inputNomeServico={setNomeServico}
           inputDataHora={setDataHora}
           inputModalAgendamento={true}
+          onCloseTeste={goToDashboard}
         />
 
         {/*Modal Deletar*/}
         <Modal
-          key={8}
+          key={4}
           isText={true}
           onClose={() => userDeletar(modalDelete.data)}
           visible={modalDelete.open}
           text={"Deletar"}
           isInput={false}
           textMensagem={`Tem certeza que deseja deletar esse item?`} 
+          onCloseTeste={goToDashboard}
         />
       </ScrollView>
     </SafeAreaView>
