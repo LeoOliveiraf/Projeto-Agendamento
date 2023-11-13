@@ -7,7 +7,7 @@ import Modal from "../../components/Modal";
 import { useState, useEffect } from "react";
 import TabelaClientesBarbearia from "../../components/TabelaClientesBarbearia";
 
-export default function Clientes() {
+export default function Clientes({navigation}) {
   const [modalCadastrar, setModalCadastrar] = useState(false);
   const [modalDeletar, setModalDeletar] = useState(false);
   const [nomeCliente, setNomeCliente] = useState("");
@@ -15,6 +15,10 @@ export default function Clientes() {
   const [dataClientes, setDataClientes] = useState([]);
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
   const [modalEditi, setModalEditi] = useState({ data: {}, open: false });
+
+  const goToDashboard = () => {
+    navigation.goBack();
+  }
 
   const openModalEditi = (item) => {
     setModalEditi({ open: true, data: item });
@@ -28,8 +32,11 @@ export default function Clientes() {
   //Começando método GET
   const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes";
   const getClientes = async () => {
+    const options = {
+      method: "GET",
+    }
     try {
-      const response = await fetch(URL);
+      const response = await fetch(URL, options);
       const json = await response.json();
       setDataClientes(json);
     } catch (error) {
@@ -158,6 +165,7 @@ export default function Clientes() {
           valueNome={nomeCliente}
           valueTelefone={telefoneCliente}
           onClose={() => setData()}
+          onCloseTeste={goToDashboard}
         />
 
         {/*Modal Deletar todos*/}
@@ -168,6 +176,7 @@ export default function Clientes() {
           visible={modalDeletar}
           text={"Deletar todos"}
           textMensagem={`Tem certeza que deseja \n deletar todos os clientes?`}
+          onCloseTeste={goToDashboard}
         />
 
         {/*Modal Editar*/}
@@ -182,6 +191,7 @@ export default function Clientes() {
           inputTelefoneCliente={setTelefoneCliente}
           valueNome={nomeCliente}
           valueTelefone={telefoneCliente}
+          onCloseTeste={goToDashboard}
         />
 
         {/*Modal Deletar*/}
@@ -192,6 +202,7 @@ export default function Clientes() {
           visible={modalDelete.open}
           text={"Deletar"}
           textMensagem={`Tem certeza que deseja deletar ${modalDelete.data.nome} da lista de clientes?`}
+          onCloseTeste={goToDashboard}
         />
       </ScrollView>
     </SafeAreaView>
