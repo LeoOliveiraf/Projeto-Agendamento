@@ -1,12 +1,12 @@
 import Modal from '../components/Modal'
 
-export default function Deslogar({navigation, redirect}) {
+export default function Deslogar({navigation}) {
     const handleLogout = () => {
         navigation.navigate('GetStarted')
     }
 
     const goToDashboard = () => {
-        navigation.navigate('HomeC')
+        navigation.navigate()
     }
     return (
         <Modal
@@ -18,7 +18,6 @@ export default function Deslogar({navigation, redirect}) {
         text={"Deslogar"}
         textMensagem={"Tem certeza que desejar deslogar ?"}
         isInput={false}
-
         />
     );
 }

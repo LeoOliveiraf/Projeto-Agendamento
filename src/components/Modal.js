@@ -22,7 +22,7 @@ export default function Popup({
   inputNomeServico,
   valueNomeServico,
   inputDataHora,
-  valueDataHora
+  valueDataHora,
 }) {
   const [valueInputDuracao, setValueInputDuracao] = useState('')
   return (
