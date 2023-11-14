@@ -9,46 +9,226 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Styles from "../../components/styles/Styles";
 import { useState } from "react";
+import { useEffect } from "react";
 import LogoSecundaria from "../../components/LogoSecundaria";
-import Icon from "react-native-vector-icons/AntDesign";
+//import Icon from "react-native-vector-icons/AntDesign";
 
 export default function Perfil() {
   const [modalVisibleSalvar, setModalVisibleSalvar] = useState(false);
+  const [modalVisibleBarbeiro, setModalVisibleBarbeiro] = useState(false);
   const [modalVisibleDeslogar, setModalVisibleDeslogar] = useState(false);
+  const [dataAdm, setDataAdministrador] = useState([]);
+  const [dataBarbeiro, setDataBarbeiro] = useState({ endereco: '', telefone: '' });
+
+  const editarConta = (campo, valor) => {
+    setDataAdministrador((prevData) => ({
+      ...prevData,
+      [campo]: valor,
+    }));
+  };
+
+  const editarContato = (campo, valor) => {
+    setDataBarbeiro((prevData) => ({
+      ...prevData,
+      [campo]: valor,
+    }));
+  };
+
+  const handleSalvarAdm = () => {
+    setModalVisibleSalvar(true);
+  };
+  const handleConfirmarModalSalvarAdm = async () => {
+    setModalVisibleSalvar(false);
+    await putAdministrador();
+  };
+
+  const handleSalvarBarbeiro = () => {
+    setModalVisibleBarbeiro(true);
+  };
+  const handleConfirmarModalSalvarBarbeiro = async () => {
+    setModalVisibleBarbeiro(false);
+    await putBarbeiro();
+  };
+
+  {/*_____________________________________________________________________________________________ */ }
+  const putAdministrador = async () => {
+    try {
+      const administradorId = 1;
+      const URL = `https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Administradors/${administradorId}`;
+
+      const options = {
+        method: 'PUT',
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: 1,
+          login: dataAdm.login,
+          senha: dataAdm.senha,
+        }),
+      };
+      const response = await fetch(URL, options);
+      if (!response.ok) {
+        console.error(`HTTP error! Status: ${response.status}`);
+      } else {
+        console.log('Update successful!');
+      }
+    } catch (error) {
+      console.error('Network request failed:', error);
+    }
+  };
+
+
+  {/*_____________________________________________________________________________________________ */ }
+
+  const putBarbeiro = async () => {
+    const barbeiroId = 1;
+    const URL = `https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Barbearias/${barbeiroId}`;
+
+    const options = {
+      method: 'PUT',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: 1,
+        endereco: dataBarbeiro.endereco,
+        telefone: dataBarbeiro.telefone,
+        administradorId: 1
+      }),
+    };
+    try {
+      const response = await fetch(URL, options);
+      if (!response.ok) {
+        console.error(`HTTP error! Status: ${response.status}`);
+      } else {
+        console.log('Update successful!');
+      }
+    } catch (error) {
+      console.error('Network request failed:', error);
+    } finally {
+      console.log('Finally!');
+    }
+  };
+
+  const getAdministrador = async () => {
+    try {
+      const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Administradors/";
+      const options = {
+        method: 'GET'
+      };
+      const response = await fetch(URL, options);
+      const json = await response.json();
+      const administradorId1 = json.find(item => item.id === 1);
+      setDataAdministrador(administradorId1);
+      console.log(dataAdm)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getAdministrador();
+  }, []);
+
+  const getbarbeiro = async () => {
+    try {
+      const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Barbearias/";
+      const options = {
+        method: 'GET'
+      };
+      const response = await fetch(URL, options);
+      const json = await response.json();
+      setDataBarbeiro(json[0]);
+      console.log(dataBarbeiro)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getbarbeiro();
+  }, []);
   return (
     <SafeAreaView style={Styles.appDefault}>
-      <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ marginTop: 20 }} showsVerticalScrollIndicator={false}>
         <LogoSecundaria>Perfil</LogoSecundaria>
         <Text style={Styles.textInputConta}>Editar Conta</Text>
         <View style={Styles.containerPerfil}>
           <View style={{ width: "90%" }}>
-            <Text style={Styles.tituloInput}>Palavra-chave</Text>
+            <Text style={Styles.tituloInput}>Login</Text>
           </View>
-          <TextInput style={Styles.InputPerfil} />
+          <TextInput
+            style={Styles.InputPerfil}
+            value={dataAdm.login}
+            onChangeText={(text) => editarConta('login', text)}
+          />
           <View style={{ width: "90%" }}>
             <Text style={Styles.tituloInput}>Senha</Text>
           </View>
-          <TextInput style={Styles.InputPerfil} secureTextEntry={true} />
+          <TextInput
+            style={Styles.InputPerfil}
+            secureTextEntry={true}
+            value={dataAdm.senha}
+            onChangeText={(text) => editarConta('senha', text)}
+          />
         </View>
+        {/* BOTÃO DE SALVAR CONTA */}
+        <View style={{ alignItems: "center" }}>
+          <Pressable
+            style={styles.botaoSalvar}
+            onPress={handleSalvarAdm}
+          >
+            <Text style={styles.textBotaoSalvar}>Salvar</Text>
+          </Pressable>
+        </View>
+        {/*_____________________________________________________________________________________________ */}
+
+        {/* EDITAR LOCALIZAÇÃO E CONTATO */}
         <Text style={Styles.textInputLocalizacao}>
           Editar localização e contato
         </Text>
+
         <View style={Styles.containerLocalizacao}>
+          {/* ENDEREÇO */}
           <View style={{ width: "90%" }}>
             <Text style={Styles.tituloInput}>Endereço</Text>
           </View>
-          <TextInput style={Styles.InputPerfil} />
+          <TextInput
+            style={Styles.InputPerfil}
+            value={dataBarbeiro.endereco}
+            onChangeText={(text) => editarContato('endereco', text)}
+          />
+
+          {/* TELEFONE */}
           <View style={{ width: "90%" }}>
-            <Text style={Styles.tituloInput}>WhatsApp</Text>
+            <Text style={Styles.tituloInput}>Telefone</Text>
           </View>
-          <TextInput style={Styles.InputPerfil} />
-          <View style={{ width: "90%" }}>
-            <Text style={Styles.tituloInput}>Instagram</Text>
-          </View>
-          <TextInput style={Styles.InputPerfil} />
+          <TextInput
+            style={Styles.InputPerfil}
+            value={dataBarbeiro.telefone}
+            onChangeText={(text) => editarContato('telefone', text)}
+          />
         </View>
+
+
+        {/* BOTÃO DE SALVAR BARBEIRO */}
+        <View style={{ alignItems: "center", marginBottom: 35 }}>
+          <Pressable
+            style={styles.botaoSalvar}
+            onPress={handleSalvarBarbeiro}
+          >
+            <Text style={styles.textBotaoSalvar}>Salvar</Text>
+          </Pressable>
+        </View>
+
+        {/*_____________________________________________________________________________________________ */}
+
+        {/*  MODAL BOTÃO SALVAR ADMINISTRADOR */}
+
         <Modal
           animationType="slide"
           transparent={true}
@@ -58,6 +238,7 @@ export default function Perfil() {
             setModalVisibleSalvar(!modalVisibleSalvar);
           }}
         >
+          {/* POP UP */}
           <View style={styles.modalBackground}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
@@ -67,11 +248,11 @@ export default function Perfil() {
                   </Pressable>
                 </View>
                 <Text style={styles.modalText}>
-                  Tem certeza que deseja {"\n"} salvar as alterações?
+                  Tem certeza que deseja {"\n"} salvar as alterações de conta?
                 </Text>
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisibleSalvar(!modalVisibleSalvar)}
+                  onPress={handleConfirmarModalSalvarAdm}
                 >
                   <Text style={styles.textStyle}>Salvar</Text>
                 </Pressable>
@@ -79,54 +260,49 @@ export default function Perfil() {
             </View>
           </View>
         </Modal>
+
+        {/*_____________________________________________________________________________________________ */}
+
+        {/*  MODAL BOTÃO SALVAR BARBEIRO */}
+
         <Modal
           animationType="slide"
           transparent={true}
-          visible={modalVisibleDeslogar}
+          visible={modalVisibleBarbeiro}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
-            setModalVisibleDeslogar(!modalVisibleDeslogar);
+            setModalVisibleBarbeiro(!modalVisibleBarbeiro);
           }}
         >
+          {/* POP UP */}
           <View style={styles.modalBackground}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <View style={{ width: 280, margin: 15 }}>
-                  <Pressable onPress={() => setModalVisibleDeslogar(false)}>
+                  <Pressable onPress={() => setModalVisibleBarbeiro(false)}>
                     <Icon name="close" size={35} style={{ color: "#B9901E" }} />
                   </Pressable>
                 </View>
                 <Text style={styles.modalText}>
-                  Tem certeza que deseja {"\n"} deslogar do aplicativo?
+                  Tem certeza que deseja {"\n"} salvar as alterações de barbeiro?
                 </Text>
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisibleDeslogar(!modalVisibleDeslogar)}
+                  onPress={handleConfirmarModalSalvarBarbeiro}
                 >
-                  <Text style={styles.textStyle}>Sair</Text>
+                  <Text style={styles.textStyle}>Salvar</Text>
                 </Pressable>
               </View>
             </View>
           </View>
         </Modal>
-        <View style={{ alignItems: "center" }}>
-          <Pressable
-            style={styles.botaoSalvar}
-            onPress={() => setModalVisibleSalvar(true)}
-          >
-            <Text style={styles.textBotaoSalvar}>Salvar</Text>
-          </Pressable>
-          <Pressable
-            style={styles.botaoDeslogar}
-            onPress={() => setModalVisibleDeslogar(true)}
-          >
-            <Text style={styles.textBotaoDeslogar}>Deslogar</Text>
-          </Pressable>
-        </View>
+
       </ScrollView>
     </SafeAreaView>
   );
 }
+
+
 const styles = StyleSheet.create({
   modalBackground: {
     flex: 1,

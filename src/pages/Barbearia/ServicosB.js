@@ -17,6 +17,9 @@ export default function ServicosC() {
     const [duracaoServico, setDuracaoServico] = useState("");
 
     const openModalEdit = (item) => {
+        setNomeServico(item.nome);
+        setValorServico(item.valor.toString());
+        setDuracaoServico(item.duracao.toString());
         setModalEdit({open: true, data: item});
     };
     const openModalDelete = (item) => {
@@ -26,8 +29,11 @@ export default function ServicosC() {
     //Começando o método GET
     const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/TipoServicoes";
     const getServicos = async () => {
+        const options = {
+            method: "GET",
+        }
         try {
-            const response = await fetch(URL);
+            const response = await fetch(URL, options);
             const json = await response.json();
             setDataServicos(json);
         } catch (error) {
@@ -37,7 +43,6 @@ export default function ServicosC() {
     useEffect(() => {
         getServicos();
     }, []);
-
     //Começando método POST
     const doPost = () => {
         const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/TipoServicoes";
