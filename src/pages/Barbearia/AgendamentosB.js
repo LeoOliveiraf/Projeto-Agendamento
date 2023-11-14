@@ -4,7 +4,6 @@ import Styles from '../../components/styles/Styles';
 import LogoSecundaria from '../../components/LogoSecundaria';
 import BarraDePesquisa from '../../components/BarraDePesquisa';
 import BotaoCadastrar from '../../components/BotaoCadastrar';
-import BotaoDeletar from '../../components/BotaoDeletar';
 import Modal from '../../components/Modal';
 import TabelaAgendamentosBarbearia from '../../components/TabelaAgendamentosBarbearia';
 
@@ -127,7 +126,7 @@ export default function AgendamentosB({navigation}) {
       },
       body: JSON.stringify({
         id: item.id,
-        data: dataHora,
+        data: moment(dataHora).format('DD/MM/YYYY'),
         tipoServicoId: serviceId,
         clienteId: clienteId,
         barbeariaId: 1
@@ -171,7 +170,6 @@ export default function AgendamentosB({navigation}) {
         <BarraDePesquisa />
         <View style={{ flexDirection: 'row', marginTop: 40, marginBottom: 40 }}>
           <BotaoCadastrar text={"Agendar"} onPress={() => setModalAgendar(!modalAgendar)}/>
-          <BotaoDeletar text={"Deletar todos"} />
         </View>
         <Text style={[Styles.textLogoSecundaria, { fontSize: 25, alignSelf: 'flex-start', marginLeft: 10 }]}>Dia 05/10/2023</Text>
         <TabelaAgendamentosBarbearia 
