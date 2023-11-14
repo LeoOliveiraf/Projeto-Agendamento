@@ -17,6 +17,7 @@ export default function AgendamentosB({navigation}) {
   const [listaClientes, setListaClientes] = useState([]);
   const [modalEditar, setModalEditar] = useState({ data: {}, open: false });
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
+  const [dataPesquisada, setDataPesquisada] = useState("");
 
   const goToDashboard = () => {
     navigation.goBack();
@@ -126,7 +127,7 @@ export default function AgendamentosB({navigation}) {
       },
       body: JSON.stringify({
         id: item.id,
-        data: moment(dataHora).format('DD/MM/YYYY'),
+        data: dataHora,
         tipoServicoId: serviceId,
         clienteId: clienteId,
         barbeariaId: 1
@@ -160,20 +161,20 @@ export default function AgendamentosB({navigation}) {
     doGetAgendamento();
   }, []);
 
-  
-
+  dataDia = dataPesquisada;
   //Tela + Modals
   return (
     <SafeAreaView style={Styles.appDefault}>
       <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
         <LogoSecundaria>Agendamentos</LogoSecundaria>
-        <BarraDePesquisa />
+        <BarraDePesquisa valorBarraPesquisa={dataPesquisada} changeBarraPesquisa={(data) => setDataPesquisada(data)}/>
         <View style={{ flexDirection: 'row', marginTop: 40, marginBottom: 40 }}>
           <BotaoCadastrar text={"Agendar"} onPress={() => setModalAgendar(!modalAgendar)}/>
         </View>
-        <Text style={[Styles.textLogoSecundaria, { fontSize: 25, alignSelf: 'flex-start', marginLeft: 10 }]}>Dia 05/10/2023</Text>
+        
+        <Text style={[Styles.textLogoSecundaria, { fontSize: 25, alignSelf: 'flex-start', marginLeft: 10 }]}>{'Dia: ' + dataDia}</Text>
         <TabelaAgendamentosBarbearia 
-          dataAgendamento={dataAgendamento}
+          dataAgendamento={dataAgendamento.filter(item => item.data.includes(dataPesquisada))}
           onDelete={openModalDelete}
           onEditi={openModalEditar}
         />

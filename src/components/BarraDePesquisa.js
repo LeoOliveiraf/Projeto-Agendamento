@@ -1,7 +1,7 @@
 import { SearchBar } from "@rneui/themed";
 import { View } from "react-native";
 
-export default function BarraDePesquisa(){
+export default function BarraDePesquisa({valorBarraPesquisa, changeBarraPesquisa}){
     return(
         <View style={{marginTop: 30}}>
             <SearchBar style={{fontSize: 16}} placeholder="Pesquisar agendamentos" 
@@ -10,7 +10,7 @@ export default function BarraDePesquisa(){
                 inputContainerStyle={{height: 40, borderRadius: 30}}
                 round='false' 
                 lightTheme='true'
-                showCancel='true'>
+                showCancel='true'  onChangeText={changeBarraPesquisa} value={valorBarraPesquisa}>
             </SearchBar>
         </View>
     )
