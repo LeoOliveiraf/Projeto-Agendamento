@@ -4,10 +4,9 @@ import Styles from "../../components/styles/Styles";
 import { useState, useEffect } from "react";
 import TabelaServicosBarbearia from "../../components/TabelaServicosBarbearia";
 import BotaoCadastrar from "../../components/BotaoCadastrar";
-import BotaoDeletar from "../../components/BotaoDeletar";
 import Modal from "../../components/Modal";
 
-export default function ServicosC() {
+export default function ServicosC({navigation}) {
     const [modalEdit, setModalEdit] = useState({data: {}, open: false});
     const [modalDelete, setModalDelete] = useState({data: {}, open: false});
     const [modalCadastrar, setModalCadastrar] = useState(false);
