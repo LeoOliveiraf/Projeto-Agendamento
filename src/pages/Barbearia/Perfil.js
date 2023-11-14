@@ -39,8 +39,6 @@ export default function Perfil() {
     getAdministrador();
   }, []);
 
-
-
   return (
     <SafeAreaView style={Styles.appDefault}>
       <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
