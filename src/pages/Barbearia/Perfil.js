@@ -116,10 +116,6 @@ export default function Perfil() {
     }
   };
 
-
-  {/*_____________________________________________________________________________________________ */ }
-
-  {/* GET DA TABELA ADMINISTRADOR */ }
   const getAdministrador = async () => {
     try {
       const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Administradors/";
@@ -139,8 +135,6 @@ export default function Perfil() {
     getAdministrador();
   }, []);
 
-
-  {/* GET DA TABELA BARBEIRO */ }
   const getbarbeiro = async () => {
     try {
       const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Barbearias/";
@@ -158,35 +152,12 @@ export default function Perfil() {
   useEffect(() => {
     getbarbeiro();
   }, []);
-
-
-  {/*_____________________________________________________________________________________________ */ }
-
-
   return (
     <SafeAreaView style={Styles.appDefault}>
       <ScrollView style={{ marginTop: 20 }} showsVerticalScrollIndicator={false}>
         <LogoSecundaria>Perfil</LogoSecundaria>
-
-        {/* <View style={{ flexDirection: 'row', marginTop: 15, marginBottom: 30, justifyContent: 'center',}}>
-            <TouchableOpacity
-              onPress={() => Linking.openURL("https://www.instagram.com/therock/")}
-            >
-              <Icon name="instagram" size={30} color="#E1306C" />
-            </TouchableOpacity>
-            <View style={{ width: 20 }} />
-            <TouchableOpacity
-              onPress={() => Linking.openURL("https://wa.me/43988197106")}
-            >
-              <Icon name="whatsapp" size={30} color="#25D366" />
-            </TouchableOpacity>
-        </View>   */}
-
-        {/* EDITAR CONTA */}
         <Text style={Styles.textInputConta}>Editar Conta</Text>
         <View style={Styles.containerPerfil}>
-
-          {/* Login */}
           <View style={{ width: "90%" }}>
             <Text style={Styles.tituloInput}>Login</Text>
           </View>
@@ -195,8 +166,6 @@ export default function Perfil() {
             value={dataAdm.login}
             onChangeText={(text) => editarConta('login', text)}
           />
-
-          {/* Senha */}
           <View style={{ width: "90%" }}>
             <Text style={Styles.tituloInput}>Senha</Text>
           </View>
@@ -207,7 +176,6 @@ export default function Perfil() {
             onChangeText={(text) => editarConta('senha', text)}
           />
         </View>
-
         {/* BOTÃO DE SALVAR CONTA */}
         <View style={{ alignItems: "center" }}>
           <Pressable

@@ -21,6 +21,8 @@ export default function Clientes({navigation}) {
   }
 
   const openModalEditi = (item) => {
+    setNomeCliente(item.nome); 
+    setTelefoneCliente(item.telefone);
     setModalEditi({ open: true, data: item });
   };
 

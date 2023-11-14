@@ -161,6 +161,7 @@ export default function AgendamentosB({navigation}) {
     doGetAgendamento();
   }, []);
 
+  
 
   //Tela + Modals
   return (
@@ -214,7 +215,7 @@ export default function AgendamentosB({navigation}) {
           onClose={() => userEditar(modalEditar.data)}
           visible={modalEditar.open}
           text={"Editar"}
-          valueNomeAgendamentoCliente={nomeCliente}
+          valueNomeAgendamentoCliente={nomeCliente.clienteNome}
           valueNomeServico={nomeServico}
           valueDataHora={dataHora}
           inputNome={setNomeCliente}
