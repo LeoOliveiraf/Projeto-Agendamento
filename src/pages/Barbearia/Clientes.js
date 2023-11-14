@@ -144,10 +144,6 @@ export default function Clientes({navigation}) {
             text={"Cadastrar"}
             onPress={() => setModalCadastrar(!modalCadastrar)}
           />
-          <BotaoDeletar
-            text={"Deletar todos"}
-            onPress={() => setModalDeletar(!modalDeletar)}
-            />
         </View>
         <TabelaClientesBarbearia
           dataClientes={dataClientes}
@@ -167,7 +163,7 @@ export default function Clientes({navigation}) {
           valueNome={nomeCliente}
           valueTelefone={telefoneCliente}
           onClose={() => setData()}
-          onCloseTeste={goToDashboard}
+          onCloseTeste={() => setModalCadastrar(!modalCadastrar)}
         />
 
         {/*Modal Deletar todos*/}

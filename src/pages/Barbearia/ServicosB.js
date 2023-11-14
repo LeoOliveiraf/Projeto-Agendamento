@@ -25,7 +25,10 @@ export default function ServicosC() {
     const openModalDelete = (item) => {
         setModalDelete({open: true, data: item});
     };
-
+    const goToDashboard = () => {
+        navigation.goBack();
+      }
+    
     //Começando o método GET
     const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/TipoServicoes";
     const getServicos = async () => {
@@ -131,10 +134,6 @@ export default function ServicosC() {
                 text={"Cadastrar"}
                 onPress={() => setModalCadastrar(!modalCadastrar)}
             />
-            <BotaoDeletar
-                text={"Deletar todos"}
-                //onPress={() => setModalDeletarTodos(!modalDeletarTodos)}
-            />
         </View>
         <TabelaServicosBarbearia
             dataServicos={dataServicos}
@@ -156,6 +155,7 @@ export default function ServicosC() {
             valueDuracao={duracaoServico}
             valueValor={valorServico}
             onClose={() => setData()}
+            onCloseTeste={goToDashboard}
         />
 
         {/*Modal Deletar*/}
@@ -166,6 +166,7 @@ export default function ServicosC() {
             visible={modalDelete.open}
             text={"Deletar"}
             textMensagem={`Tem certeza que deseja deletar o serviço ${modalDelete.data.nome}?`}
+            onCloseTeste={goToDashboard}
         />
 
         {/*Modal Editar*/}
@@ -182,6 +183,7 @@ export default function ServicosC() {
             valueNomeServico={nomeServico}
             valueValor={valorServico}
             valueNome={duracaoServico}
+            onCloseTeste={goToDashboard}
         />
       </ScrollView>
     </SafeAreaView>
