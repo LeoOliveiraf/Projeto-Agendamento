@@ -5,9 +5,9 @@ import { DataTable } from 'react-native-paper';
 import moment from 'moment';
 
 export default App = ({ dataAgendamento, onDelete, onEditi }) => {
-    const formatIsoToBrData = (isoDate) => {
-       return !isoDate ? "NULL" : moment.utc(isoDate).format("DD/MM/YYYY");
-    }
+    //const formatIsoToBrData = (isoDate) => {
+       //return !isoDate ? "NULL" : moment.utc(isoDate).format("DD/MM/YYYY");
+    //}
 
     return (
         <View style={{ width: 310 }}>
@@ -31,7 +31,7 @@ export default App = ({ dataAgendamento, onDelete, onEditi }) => {
                     {item.clienteNome}
                 </DataTable.Cell>
                 <DataTable.Cell textStyle={styles.cell}>
-                {formatIsoToBrData(item.data)}
+                    {item.data}
                 </DataTable.Cell>
                 <DataTable.Cell textStyle={styles.cell}> 
                     {item.tipoServicoNome}
