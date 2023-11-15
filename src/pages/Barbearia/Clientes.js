@@ -81,8 +81,7 @@ export default function Clientes({navigation}) {
   //Começando método DELETE
   const userDeletar = async (item) => {
     const URL =
-      "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes/" +
-      item.id;
+      "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes/" + item.id;
 
     const options = {
       method: "DELETE",

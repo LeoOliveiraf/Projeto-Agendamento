@@ -19,6 +19,7 @@ export default function AgendamentosB({navigation}) {
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
   const [dataPesquisada, setDataPesquisada] = useState("");
 
+
   const goToDashboard = () => {
     navigation.goBack();
   }
@@ -195,18 +196,6 @@ export default function AgendamentosB({navigation}) {
           valueNomeServico={nomeServico}
           onCloseTeste={goToDashboard}
         />
-
-        {/*Modal Deletar todos*/}
-        <Modal
-          key={2}
-          isText={true}
-          visible={false}
-          text={"Deletar todos"}
-          textMensagem={"Tem certeza que deseja \n deletar todos os clientes?"}
-          isInput={false}
-          onCloseTeste={goToDashboard}
-        />
-
         {/*Modal Editar*/}
         <Modal
           key={3}

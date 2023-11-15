@@ -2,8 +2,12 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { DataTable } from 'react-native-paper';
+import moment from 'moment';
 
 export default App = ({ dataAgendamento, onDelete, onEditi }) => {
+    const formatIsoToBrData = (isoDate) => {
+       return !isoDate ? "NULL" : moment.utc(isoDate).format("DD/MM/YYYY");
+    }
 
     return (
         <View style={{ width: 310 }}>
@@ -27,7 +31,7 @@ export default App = ({ dataAgendamento, onDelete, onEditi }) => {
                     {item.clienteNome}
                 </DataTable.Cell>
                 <DataTable.Cell textStyle={styles.cell}>
-                    {item.data}
+                {formatIsoToBrData(item.data)}
                 </DataTable.Cell>
                 <DataTable.Cell textStyle={styles.cell}> 
                     {item.tipoServicoNome}
