@@ -20,7 +20,6 @@ export default function AgendamentosB({navigation}) {
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
   const [dataPesquisada, setDataPesquisada] = useState("");
 
-  const BR_DATETIME_PATTERN1 = "DD/MM/YYYY";
   const BR_DATETIME_PATTERN = "DD/MM/YYYY HH:mm";
   const  ISO_DATETIME_PATTERN = "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
 
@@ -29,11 +28,10 @@ export default function AgendamentosB({navigation}) {
     return date.isValid() ? date.format(ISO_DATETIME_PATTERN) : "Data Incorreta"
   }
 
-  const formatDateBarraPesquisa = (dateString) => {
-    const date = moment(dateString, BR_DATETIME_PATTERN1);
-    return date.isValid() ? date.format(ISO_DATETIME_PATTERN) : ""
-  }
-
+    const formatIsoToBrData = (isoDate) => {
+       return !isoDate ? "" : moment.utc(isoDate).format("DD/MM/YYYY");
+    }
+    
   //Carregando dados - GET Serviços
   const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/TipoServicoes";
   const getTipoServicoes = async () => {
@@ -173,6 +171,13 @@ export default function AgendamentosB({navigation}) {
     }
   }
 
+  const formatadaData = dataAgendamento.map(item => {
+    return {
+      ...item,
+      data: formatIsoToBrData(item.data)
+    };
+  });
+  
   dataDia = dataPesquisada;
   //Tela + Modals
   return (
@@ -183,10 +188,9 @@ export default function AgendamentosB({navigation}) {
         <View style={{ flexDirection: 'row', marginTop: 40, marginBottom: 40 }}>
           <BotaoCadastrar text={"Agendar"} onPress={() => setModalAgendar(!modalAgendar)}/>
         </View>
-        
         <Text style={[Styles.textLogoSecundaria, { fontSize: 25, alignSelf: 'flex-start', marginLeft: 10 }]}>{'Dia: ' + dataDia}</Text>
         <TabelaAgendamentosBarbearia 
-          dataAgendamento={dataAgendamento.filter(item => item.data.includes(dataPesquisada))}
+          dataAgendamento={formatadaData.filter(item => item.data.includes(dataPesquisada))}
           onDelete={openModalDelete}
           onEditi={openModalEditar}
         />
