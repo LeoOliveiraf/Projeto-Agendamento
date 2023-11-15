@@ -6,6 +6,7 @@ import BarraDePesquisa from '../../components/BarraDePesquisa';
 import BotaoCadastrar from '../../components/BotaoCadastrar';
 import Modal from '../../components/Modal';
 import TabelaAgendamentosBarbearia from '../../components/TabelaAgendamentosBarbearia';
+import moment from 'moment';
 
 export default function AgendamentosB({navigation}) {
   const [modalAgendar, setModalAgendar] = useState(false);
@@ -19,7 +20,20 @@ export default function AgendamentosB({navigation}) {
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
   const [dataPesquisada, setDataPesquisada] = useState("");
 
-  
+  const BR_DATETIME_PATTERN1 = "DD/MM/YYYY";
+  const BR_DATETIME_PATTERN = "DD/MM/YYYY HH:mm";
+  const  ISO_DATETIME_PATTERN = "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
+
+  const transforToISoToFormat = (dateString) => {
+    const date = moment(dateString, BR_DATETIME_PATTERN);
+    return date.isValid() ? date.format(ISO_DATETIME_PATTERN) : "Data Incorreta"
+  }
+
+  const formatDateBarraPesquisa = (dateString) => {
+    const date = moment(dateString, BR_DATETIME_PATTERN1);
+    return date.isValid() ? date.format(ISO_DATETIME_PATTERN) : ""
+  }
+
   //Carregando dados - GET Serviços
   const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/TipoServicoes";
   const getTipoServicoes = async () => {
@@ -103,7 +117,7 @@ export default function AgendamentosB({navigation}) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        data: dataHora,
+        data: transforToISoToFormat(dataHora),
         tipoServicoId: serviceId,
         clienteId: clienteId,
         barbeariaId: 1
@@ -118,11 +132,12 @@ export default function AgendamentosB({navigation}) {
     await doGetAgendamento();
   };
   
-
   // Começando o método PUT
   const openModalEditar = (item) => {
+
     setModalEditar({open: true, data: item});
   };
+
   const userEditar = async (item) => {
     const {id: serviceId} = listaServicos.find(servico => servico.nome.toLowerCase().trim() === nomeServico.toLowerCase().trim() );
     const {id: clienteId} = listaClientes.find(cliente => cliente.nome.toLowerCase().trim() === nomeCliente.toLowerCase().trim() );

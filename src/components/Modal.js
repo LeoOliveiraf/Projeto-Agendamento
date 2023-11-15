@@ -63,7 +63,7 @@ export default function Popup({
               <Text style={{ fontSize: 17 }}>Serviço</Text>
               <TextInput style={styles.inputModal} onChangeText={inputNomeServico} value={valueNomeServico}/>
               <Text style={{ fontSize: 17 }}>Data e Horário</Text>
-              <TextInput style={styles.inputModal} onChangeText={inputDataHora} value={valueDataHora}/>
+              <TextInput style={styles.inputModal} onChangeText={inputDataHora} value={valueDataHora} placeholder="DD/MM/YYYY 00:00"/>
             </View>      
           ) : null}
           {isText ? <Text style={styles.modalText}>{textMensagem}</Text> : null}
