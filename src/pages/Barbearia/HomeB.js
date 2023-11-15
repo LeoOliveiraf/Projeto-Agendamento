@@ -11,8 +11,8 @@ export default function HomeB({navigation}) {
       <Titulos>Gerencie {'\n'} sua Barbearia</Titulos>
       <BotaoSecundario text={'Agendamentos'} onPress={() => {navigation.navigate('AgendamentosB')}}/>
       <BotaoSecundario text={'Serviços'} onPress={() => {navigation.navigate('ServicosB')}}/>
-      <BotaoSecundario text={'Clientes'} onPress={() => {navigation.navigate('Clientes')}}/>
-      <BotaoSecundario text={'Perfil'} onPress={() => {navigation.navigate('Perfil')}}/>
+      <BotaoSecundario text={'Clientes'} onPress={() => {navigation.navigate('ClientesB')}}/>
+      <BotaoSecundario text={'Perfil'} onPress={() => {navigation.navigate('PerfilB')}}/>
     </View>
   );
 }
