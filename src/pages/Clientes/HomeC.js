@@ -1,4 +1,7 @@
-import { Image, Text, View } from "react-native";
+import { 
+  Text,
+  View, 
+  Image } from "react-native";
 import LogoHome from "../../components/LogoHome";
 import Styles from "../../components/styles/Styles";
 import Titulos from "../../components/Titulo";
@@ -6,8 +9,32 @@ import BotaoSecundario from "../../components/BotaoSecundario";
 import localizacao from "../../assets/imgs/localizacao.png"
 import whatsapp from "../../assets/imgs/whatsapp.png";
 import instagram from "../../assets/imgs/instagram.png";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function HomeC({navigation}) {
+
+  const [dataBarbeiro, setDataBarbeiro] = useState({ endereco: '', telefone: '' });
+
+  {/* GET DA TABELA BARBEIRO */}
+  const getbarbeiro = async () => {
+    try {
+      const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Barbearias/";
+      const options = {
+        method: 'GET'
+      };
+      const response = await fetch(URL,options);
+      const json = await response.json();
+      setDataBarbeiro(json[0]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getbarbeiro();
+  }, []);
+
+
   return (
     <View style={Styles.appDefault}>
       <LogoHome />
@@ -21,12 +48,14 @@ export default function HomeC({navigation}) {
           <View style={Styles.containerFilho}>
             <Image source={localizacao} style={Styles.imgHomeCliente} />
             <Text style={Styles.textInformacaoBarber}>
-              R. Rio Ívai, 207 - {"\n"} Jd Santo Amaro, Cambé - PR
+              {dataBarbeiro.endereco}
             </Text>
           </View>
           <View style={Styles.containerFilho}>
             <Image source={whatsapp} style={Styles.imgHomeCliente} />
-            <Text style={Styles.textInformacaoBarber}>(43) 98486-6535</Text>
+            <Text style={Styles.textInformacaoBarber}>
+              {dataBarbeiro.telefone}
+            </Text>
           </View>
           <View style={Styles.containerFilho}>
             <Image source={instagram} style={Styles.imgHomeCliente} />

@@ -18,7 +18,6 @@ export default function LoginC({ navigation }) {
         const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes";
         const response = await fetch(URL);
         const json = await response.json();
-        console.log("Cliente: ",dataClientes);
         setDataClientes(json);
     } catch (error) {
         console.error(error);

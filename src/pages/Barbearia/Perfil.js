@@ -126,7 +126,6 @@ export default function Perfil() {
       const json = await response.json();
       const administradorId1 = json.find(item => item.id === 1);
       setDataAdministrador(administradorId1);
-      console.log(dataAdm)
     } catch (error) {
       console.error(error);
     }
@@ -144,7 +143,6 @@ export default function Perfil() {
       const response = await fetch(URL, options);
       const json = await response.json();
       setDataBarbeiro(json[0]);
-      console.log(dataBarbeiro)
     } catch (error) {
       console.error(error);
     }

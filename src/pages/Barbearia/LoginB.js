@@ -27,7 +27,6 @@ export default function LoginB({navigation}) {
       const response = await fetch(URL,options);
       const json = await response.json();
       setDataCAdministrador(json);
-      console.log("Administrador: ",dataAdministrador)
     } catch (error) {
       console.error(error);
     }
