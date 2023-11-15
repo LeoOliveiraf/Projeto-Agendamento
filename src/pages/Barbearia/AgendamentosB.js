@@ -19,10 +19,7 @@ export default function AgendamentosB({navigation}) {
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
   const [dataPesquisada, setDataPesquisada] = useState("");
 
-
-  const goToDashboard = () => {
-    navigation.goBack();
-  }
+  
   //Carregando dados - GET Serviços
   const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/TipoServicoes";
   const getTipoServicoes = async () => {
@@ -52,6 +49,21 @@ export default function AgendamentosB({navigation}) {
   };
   useEffect(() => {
     getClientes();
+  }, []);
+
+  //Começando método GET
+  const URLAgendamento = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/listaAgendamento";
+  const doGetAgendamento = async () => {
+    try {
+      const response = await fetch(URLAgendamento);
+      const json = await response.json();
+      setDataAgendamento(json);
+    } catch (error) {
+      console.log(error);
+    } 
+  }
+  useEffect(() => {
+    doGetAgendamento();
   }, []);
 
   //Começando método DELETE
@@ -99,11 +111,11 @@ export default function AgendamentosB({navigation}) {
     };
     const response =  await fetch(URL, options)
     const data = await response.json();
-    console.log(data);
   };
-  const setData = () => {
-    doPost();
+  const setData = async () => {
+    await doPost();
     setModalAgendar(!modalAgendar);
+    await doGetAgendamento();
   };
   
 
@@ -146,22 +158,6 @@ export default function AgendamentosB({navigation}) {
     }
   }
 
-
-  //Começando método GET
-  const URLAgendamento = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/listaAgendamento";
-  const doGetAgendamento = async () => {
-    try {
-      const response = await fetch(URLAgendamento);
-      const json = await response.json();
-      setDataAgendamento(json);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  useEffect(() => {
-    doGetAgendamento();
-  }, []);
-
   dataDia = dataPesquisada;
   //Tela + Modals
   return (
@@ -194,7 +190,7 @@ export default function AgendamentosB({navigation}) {
           inputDataHora={setDataHora}
           inputNomeServico={setNomeServico}
           valueNomeServico={nomeServico}
-          onCloseTeste={goToDashboard}
+          onCloseTeste={() => setModalAgendar({ data: {}, open: false })}
         />
         {/*Modal Editar*/}
         <Modal
@@ -210,7 +206,7 @@ export default function AgendamentosB({navigation}) {
           inputNomeServico={setNomeServico}
           inputDataHora={setDataHora}
           inputModalAgendamento={true}
-          onCloseTeste={goToDashboard}
+          onCloseTeste={() => setModalEditar({ data: {}, open: false })}
         />
 
         {/*Modal Deletar*/}
@@ -222,7 +218,7 @@ export default function AgendamentosB({navigation}) {
           text={"Deletar"}
           isInput={false}
           textMensagem={`Tem certeza que deseja deletar esse item?`} 
-          onCloseTeste={goToDashboard}
+          onCloseTeste={() => setModalDelete({ data: {}, open: false })}
         />
       </ScrollView>
     </SafeAreaView>

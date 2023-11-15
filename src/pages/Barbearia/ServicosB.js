@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import { SafeAreaView, ScrollView, View, } from "react-native";
 import LogoSecundaria from "../../components/LogoSecundaria";
 import Styles from "../../components/styles/Styles";
 import { useState, useEffect } from "react";
@@ -154,7 +154,7 @@ export default function ServicosC({navigation}) {
             valueDuracao={duracaoServico}
             valueValor={valorServico}
             onClose={() => setData()}
-            onCloseTeste={goToDashboard}
+            onCloseTeste={() => setModalCadastrar({ data: {}, open: false })}
         />
 
         {/*Modal Deletar*/}
@@ -165,7 +165,7 @@ export default function ServicosC({navigation}) {
             visible={modalDelete.open}
             text={"Deletar"}
             textMensagem={`Tem certeza que deseja deletar o serviço ${modalDelete.data.nome}?`}
-            onCloseTeste={goToDashboard}
+            onCloseTeste={() => setModalDelete({ data: {}, open: false })}
         />
 
         {/*Modal Editar*/}
@@ -182,7 +182,7 @@ export default function ServicosC({navigation}) {
             valueNomeServico={nomeServico}
             valueValor={valorServico}
             valueNome={duracaoServico}
-            onCloseTeste={goToDashboard}
+            onCloseTeste={() => setModalEdit({ data: {}, open: false })}
         />
       </ScrollView>
     </SafeAreaView>

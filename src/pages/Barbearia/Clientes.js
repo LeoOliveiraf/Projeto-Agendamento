@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { SafeAreaView, ScrollView, View, } from "react-native";
 import Styles from "../../components/styles/Styles";
 import LogoSecundaria from "../../components/LogoSecundaria";
 import BotaoCadastrar from "../../components/BotaoCadastrar";
@@ -154,6 +154,7 @@ export default function Clientes({navigation}) {
         <Modal
           key={1}
           isText={false}
+          onClose={() => setData()}
           visible={modalCadastrar}
           text={"Cadastrar"}
           isInput={true}
@@ -161,19 +162,7 @@ export default function Clientes({navigation}) {
           inputTelefoneCliente={setTelefoneCliente}
           valueNome={nomeCliente}
           valueTelefone={telefoneCliente}
-          onClose={() => setData()}
-          onCloseTeste={() => setModalCadastrar(!modalCadastrar)}
-        />
-
-        {/*Modal Deletar todos*/}
-        <Modal
-          key={2}
-          isText={true}
-          onClose={() => setModalDeletar(!modalDeletar)}
-          visible={modalDeletar}
-          text={"Deletar todos"}
-          textMensagem={`Tem certeza que deseja \n deletar todos os clientes?`}
-          onCloseTeste={goToDashboard}
+          onCloseTeste={() => setModalCadastrar({ data: {}, open: false })}
         />
 
         {/*Modal Editar*/}
@@ -188,7 +177,7 @@ export default function Clientes({navigation}) {
           inputTelefoneCliente={setTelefoneCliente}
           valueNome={nomeCliente}
           valueTelefone={telefoneCliente}
-          onCloseTeste={goToDashboard}
+          onCloseTeste={() => setModalEditi({ data: {}, open: false })}
         />
 
         {/*Modal Deletar*/}
@@ -199,7 +188,7 @@ export default function Clientes({navigation}) {
           visible={modalDelete.open}
           text={"Deletar"}
           textMensagem={`Tem certeza que deseja deletar ${modalDelete.data.nome} da lista de clientes?`}
-          onCloseTeste={goToDashboard}
+          onCloseTeste={() => setModalDelete({ data: {}, open: false })}
         />
       </ScrollView>
     </SafeAreaView>
