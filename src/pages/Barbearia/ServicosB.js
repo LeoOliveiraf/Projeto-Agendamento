@@ -181,7 +181,7 @@ export default function ServicosC({navigation}) {
             inputDuracao={setDuracaoServico}
             valueNomeServico={nomeServico}
             valueValor={valorServico}
-            valueNome={duracaoServico}
+            valueDuracao={duracaoServico}
             onCloseTeste={() => setModalEdit({ data: {}, open: false })}
         />
       </ScrollView>

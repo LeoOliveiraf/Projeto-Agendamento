@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import { Alert } from 'react-native';
 
 export const AuthContext = createContext({})
 
@@ -24,17 +25,12 @@ function AuthProvider({ children }) {
         // Verifica se a navegação está definida antes de usá-la
         if (navigation) {
           navigation.navigate('HomeC');
-        } else {
-          console.error("Erro: 'navigation' não está definido.");
-        }
-
-        // Você pode retornar ou fazer alguma outra ação após o login
-        console.log("Login bem-sucedido");
+        } 
       } else {
-        console.log("Credenciais incorretas");
+        Alert.alert('Nome ou Telefone estão Incorretos!')
       }
     } else {
-      console.log("Não há dados de Cliente");
+      Alert.alert('Nome ou Telefone estão Incorretos!')
     }
   }
 
