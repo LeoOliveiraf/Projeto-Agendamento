@@ -2,21 +2,21 @@ import { StyleSheet, Text, View, ScrollView, SafeAreaView } from "react-native";
 import LogoSecundaria from "../../components/LogoSecundaria";
 import Styles from "../../components/styles/Styles";
 import VisuAgendamentoCliente from "../../components/VisuAgendamentoCliente";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import moment from 'moment';
 import { ActivityIndicator } from "react-native-paper";
+import { AuthContext } from '../../contexts/auth'
 
 export default function AgendamentosC() {
-  const clienteLogado = {
-    id: 33,
-    nome: "Guilherme",     
-    telefone: "43 9999999",
-  };
+
+  const {user} = useContext(AuthContext)
+  const clienteLogado = user;
 
   const [listaDataAgendamentoCliente, setListaDataAgendamentoCliente] = useState([]);
   const [listaDataClientes, setListaDataClientes] = useState([]);
   const [clienteAgendados, setClienteAgendados] = useState([]);
   const [loading, setLoading] = useState(true);
+  
    //Começando método GET
    useEffect(() => {
     const fetchData = async () => {
@@ -55,6 +55,7 @@ export default function AgendamentosC() {
       </View>
     );
   }
+
   return (
     <SafeAreaView style={Styles.appDefault}>
       <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
