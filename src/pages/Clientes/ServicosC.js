@@ -34,7 +34,7 @@ export default function ServicosC() {
     return (
       <View style={[Styles.appDefault, styles.loadingContainer]}>
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text style={styles.loadingText}>Carregando Agendamentos...</Text>
+        <Text style={styles.loadingText}>Carregando Serviços...</Text>
       </View>
     );
   }
