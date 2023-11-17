@@ -19,6 +19,9 @@ export default function AgendamentosB({navigation}) {
   const [modalEditar, setModalEditar] = useState({ data: {}, open: false });
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
   const [dataPesquisada, setDataPesquisada] = useState("");
+  const [nomeServicoEditar, setNomeServicoEditar] = useState("");
+  const [dataHoraEditar, setDataHoraEditar] = useState("");
+  const [nomeClienteEditar, setNomeClienteEditar] = useState("");
 
   const BR_DATETIME_PATTERN = "DD/MM/YYYY HH:mm";
   const  ISO_DATETIME_PATTERN = "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
@@ -132,7 +135,10 @@ export default function AgendamentosB({navigation}) {
   
   // Começando o método PUT
   const openModalEditar = (item) => {
-
+    const { clienteNome, tipoServicoNome, data } = item;
+    setNomeClienteEditar(clienteNome);
+    setNomeServicoEditar(tipoServicoNome);
+    setDataHoraEditar(data);
     setModalEditar({open: true, data: item});
   };
 
@@ -218,9 +224,9 @@ export default function AgendamentosB({navigation}) {
           onClose={() => userEditar(modalEditar.data)}
           visible={modalEditar.open}
           text={"Editar"}
-          valueNomeAgendamentoCliente={nomeCliente.clienteNome}
-          valueNomeServico={nomeServico}
-          valueDataHora={dataHora}
+          valueNomeAgendamentoCliente={nomeClienteEditar}
+          valueNomeServico={nomeServicoEditar}
+          valueDataHora={dataHoraEditar}
           inputNome={setNomeCliente}
           inputNomeServico={setNomeServico}
           inputDataHora={setDataHora}

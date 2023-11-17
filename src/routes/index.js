@@ -19,32 +19,26 @@ import Deslogar from "../components/Deslogar";
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 
-const ClientesDrawer2 = () => {
+
+const DrawerCreateCliente = (initialRouteName) => {
   return (
-    <Drawer.Navigator screenOptions={{drawerActiveBackgroundColor: '#CECECE', drawerActiveTintColor: 'black',}}> 
-      <Drawer.Screen name="Agendamentos" component={AgendamentosC} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
+    <Drawer.Navigator initialRouteName={initialRouteName} screenOptions={{drawerActiveBackgroundColor: '#CECECE', drawerActiveTintColor: 'black',}}> 
       <Drawer.Screen name="Home" component={HomeC} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
+      <Drawer.Screen name="Agendamentos" component={AgendamentosC} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
       <Drawer.Screen name="Servicos" component={ServicosC} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
       <Drawer.Screen name="Deslogar" component={Deslogar} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}} />
     </Drawer.Navigator>
   );
 };
 
-const ClientesDrawer = () => {
+const ClientesDrawer1 = () => DrawerCreateCliente('Servicos')
+const ClientesDrawer2 = () => DrawerCreateCliente('Agendamentos')
+
+const DrawerCreateBarbearia = (initialRouteName) => {
   return (
-    <Drawer.Navigator screenOptions={{drawerActiveBackgroundColor: '#CECECE', drawerActiveTintColor: 'black',}}> 
-      <Drawer.Screen name="Servicos" component={ServicosC} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Home" component={HomeC} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Agendamentos" component={AgendamentosC} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Deslogar" component={Deslogar} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}} />
-    </Drawer.Navigator>
-  );
-};
-const BarbeariaDrawer = () => {
-  return (
-    <Drawer.Navigator screenOptions={{drawerActiveBackgroundColor: '#CECECE', drawerActiveTintColor: 'black',}}>
-      <Drawer.Screen name="Agendamentos" component={AgendamentosB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
+    <Drawer.Navigator initialRouteName={initialRouteName} screenOptions={{drawerActiveBackgroundColor: '#CECECE', drawerActiveTintColor: 'black',}}>
       <Drawer.Screen name="Home" component={HomeB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
+      <Drawer.Screen name="Agendamentos" component={AgendamentosB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
       <Drawer.Screen name="Servicos" component={ServicosB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
       <Drawer.Screen name="Clientes" component={Clientes} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
       <Drawer.Screen name="Perfil" component={Perfil} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
@@ -53,44 +47,13 @@ const BarbeariaDrawer = () => {
   );
 };
 
-const BarbeariaDrawer2 = () => {
-  return (
-    <Drawer.Navigator screenOptions={{drawerActiveBackgroundColor: '#CECECE', drawerActiveTintColor: 'black',}}>
-      <Drawer.Screen name="Servicos" component={ServicosB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Home" component={HomeB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Agendamentos" component={AgendamentosB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Clientes" component={Clientes} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Perfil" component={Perfil} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Deslogar" component={Deslogar} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}} />
-    </Drawer.Navigator>
-  );
-};
+const BarbeariaDrawer1 = () => DrawerCreateBarbearia('Agendamentos')
 
-const BarbeariaDrawer3 = () => {
-  return (
-    <Drawer.Navigator screenOptions={{drawerActiveBackgroundColor: '#CECECE', drawerActiveTintColor: 'black',}}>
-      <Drawer.Screen name="Clientes" component={Clientes} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Home" component={HomeB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Agendamentos" component={AgendamentosB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Servicos" component={ServicosB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Perfil" component={Perfil} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Deslogar" component={Deslogar} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}} />
-    </Drawer.Navigator>
-  );
-};
+const BarbeariaDrawer2 = () => DrawerCreateBarbearia('Servicos');
 
-const BarbeariaDrawer4 = () => {
-  return (
-    <Drawer.Navigator screenOptions={{drawerActiveBackgroundColor: '#CECECE', drawerActiveTintColor: 'black',}}>
-      <Drawer.Screen name="Perfil" component={Perfil} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Home" component={HomeB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Agendamentos" component={AgendamentosB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Servicos" component={ServicosB} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Clientes" component={Clientes} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}}/>
-      <Drawer.Screen name="Deslogar" component={Deslogar} options={{headerTitle: '', headerTransparent: true, headerTintColor: '#fff',}} />
-    </Drawer.Navigator>
-  );
-};
+const BarbeariaDrawer3 = () => DrawerCreateBarbearia('Clientes');
+
+const BarbeariaDrawer4 = () => DrawerCreateBarbearia('Perfil');
 
 const AppNavigator = () => {
   return (
@@ -102,9 +65,9 @@ const AppNavigator = () => {
         <Stack.Screen name="LoginC" component={LoginC} options={{title: '', headerTransparent: true, headerShown: false}}/>
         <Stack.Screen name="LoginB" component={LoginB} options={{title: '', headerTransparent: true, headerShown: false}}/>
         <Stack.Screen name="HomeB" component={HomeB} options={{title: '', headerTransparent: true, headerShown: false}}/>
-        <Stack.Screen name="ServicosC" component={ClientesDrawer} options={{title: '', headerTransparent: true, headerShown: false}}/>
+        <Stack.Screen name="ServicosC" component={ClientesDrawer1} options={{title: '', headerTransparent: true, headerShown: false}}/>
         <Stack.Screen name="ClientesB" component={BarbeariaDrawer3} options={{title: '', headerTransparent: true, headerShown: false}}/>
-        <Stack.Screen name="AgendamentosB" component={BarbeariaDrawer} options={{title: '', headerTransparent: true, headerShown: false}}/>
+        <Stack.Screen name="AgendamentosB" component={BarbeariaDrawer1} options={{title: '', headerTransparent: true, headerShown: false}}/>
         <Stack.Screen name="ServicosB" component={BarbeariaDrawer2} options={{title: '', headerTransparent: true, headerShown: false}}/>
         <Stack.Screen name="PerfilB" component={BarbeariaDrawer4} options={{title: '', headerTransparent: true, headerShown: false}}/>
       </Stack.Navigator>

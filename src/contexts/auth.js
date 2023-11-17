@@ -25,12 +25,12 @@ function AuthProvider({ children }) {
         // Verifica se a navegação está definida antes de usá-la
         if (navigation) {
           navigation.navigate('HomeC');
-        } 
+        }
       } else {
-        Alert.alert('Nome ou Telefone estão Incorretos!')
+        Alert.alert('Credenciais incorretas!')
       }
     } else {
-      Alert.alert('Nome ou Telefone estão Incorretos!')
+      Alert.alert('Não há dados de Cliente!')
     }
   }
 

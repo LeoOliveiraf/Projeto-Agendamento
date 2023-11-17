@@ -7,6 +7,7 @@ import Titulos from '../../components/Titulo';
 import Inputs from '../../components/Inputs';
 import BotaoEnviar from '../../components/BotaoEnviar';
 import { useEffect } from 'react';
+import { Alert } from 'react-native';
 
 export default function LoginB({navigation}) {
   const [showPassword, setShowPassword] = useState(true);
@@ -47,10 +48,10 @@ export default function LoginB({navigation}) {
       if (loginCorreto) {
         navigation.navigate('HomeB');
       } else {
-        console.log("Credenciais incorretas");
+        Alert.alert('Credenciais incorretas!');
       }
     } else {
-      console.log("Não há dados de administrador");
+      Alert.alert("Não há dados de Administrador!");
     }
   }; 
 
