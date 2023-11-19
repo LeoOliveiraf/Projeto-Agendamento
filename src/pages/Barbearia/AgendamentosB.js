@@ -31,9 +31,9 @@ export default function AgendamentosB({navigation}) {
     return date.isValid() ? date.format(ISO_DATETIME_PATTERN) : "Data Incorreta"
   }
 
-    const formatIsoToBrData = (isoDate) => {
-       return !isoDate ? "" : moment.utc(isoDate).format("DD/MM/YYYY");
-    }
+  const formatIsoToBrData = (isoDate) => {
+    return !isoDate ? "" : moment.utc(isoDate).format("DD/MM/YYYY");
+  }
     
   //Carregando dados - GET Serviços
   const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/TipoServicoes";
@@ -145,7 +145,6 @@ export default function AgendamentosB({navigation}) {
   const userEditar = async (item) => {
     const {id: serviceId} = listaServicos.find(servico => servico.nome.toLowerCase().trim() === nomeServico.toLowerCase().trim() );
     const {id: clienteId} = listaClientes.find(cliente => cliente.nome.toLowerCase().trim() === nomeCliente.toLowerCase().trim() );
-
     setDataHora(dataHora);
     setNomeCliente(nomeCliente);
     setNomeServico(nomeServico);
