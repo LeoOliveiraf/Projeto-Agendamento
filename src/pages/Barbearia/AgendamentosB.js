@@ -140,10 +140,11 @@ export default function AgendamentosB({navigation}) {
     setModalAgendar(!modalAgendar);
     await doGetAgendamento();
   };
-  
   // Começando o método PUT
   const openModalEditar = (item) => {
-
+    setNomeCliente(item.clienteNome);
+    setNomeServico(item.tipoServicoNome);
+    setDataHora(item.data);
     setModalEditar({open: true, data: item});
   };
 
@@ -168,16 +169,21 @@ export default function AgendamentosB({navigation}) {
         barbeariaId: 1
       }),
     };
-    try {
-      await fetch(URL, options);
-        console.log("Deu certo ", options.body);
-        console.log("Item editado com sucesso");
-    } catch (error) {
-      console.log("Erro na solicitação: ", error);
-    } finally {
-      limparInputsAgendamento();
-      setModalEditar({data: {}, open: false});
-      doGetAgendamento();
+    const conflitoAgendamento = formatadaData.find(data => data.data.toLowerCase().trim() === dataHora.toLowerCase().trim());
+    if(conflitoAgendamento){
+      Alert.alert("Já existe um agendamento marcado para esse dia e horario!");
+    }else{
+      try {
+        await fetch(URL, options);
+          console.log("Deu certo ", options.body);
+          console.log("Item editado com sucesso");
+      } catch (error) {
+        console.log("Erro na solicitação: ", error);
+      } finally {
+        limparInputsAgendamento();
+        setModalEditar({data: {}, open: false});
+        doGetAgendamento();
+      }
     }
   }
 
@@ -228,7 +234,7 @@ export default function AgendamentosB({navigation}) {
           onClose={() => userEditar(modalEditar.data)}
           visible={modalEditar.open}
           text={"Editar"}
-          valueNomeAgendamentoCliente={nomeCliente.clienteNome}
+          valueNomeAgendamentoCliente={nomeCliente}
           valueNomeServico={nomeServico}
           valueDataHora={dataHora}
           inputNome={setNomeCliente}

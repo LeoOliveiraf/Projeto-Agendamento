@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, View, } from "react-native";
+import { Alert, SafeAreaView, ScrollView, View, } from "react-native";
 import Styles from "../../components/styles/Styles";
 import LogoSecundaria from "../../components/LogoSecundaria";
 import BotaoCadastrar from "../../components/BotaoCadastrar";
@@ -16,9 +16,7 @@ export default function Clientes({navigation}) {
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
   const [modalEditi, setModalEditi] = useState({ data: {}, open: false });
 
-  const goToDashboard = () => {
-    navigation.goBack();
-  }
+  
 
   const openModalEditi = (item) => {
     setNomeCliente(item.nome); 
@@ -51,7 +49,7 @@ export default function Clientes({navigation}) {
 
 
   //Começando método POST
-  const doPost = () => {
+  const doPost = async () => {
     const URL =
       "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Clientes";
     const options = {
@@ -65,19 +63,30 @@ export default function Clientes({navigation}) {
         telefone: telefoneCliente,
       }),
     };
-    fetch(URL, options).then((response) => {
-      if (!response.ok) {
-        throw new Error("A solicitação via POST falhou!");
+    const telefoneConflito = dataClientes.find(cliente => cliente.telefone.toLowerCase().trim() === telefoneCliente.toLowerCase().trim())
+    if(telefoneConflito){
+      Alert.alert("Desculpe, este telefone já está cadastrado!")
+    }else{
+      try {
+        await fetch(URL, options);
+      } catch (error) {
+        console.log("Erro na solicitação: ", error);
+      } finally {
+        getClientes();
       }
-      return response.json();
-    });
-  };
-  const setData = () => {
+      };
+    }
+  const setData = async () => {
     doPost();
-    setModalCadastrar(!modalCadastrar);
     getClientes();
+    setModalCadastrar(!modalCadastrar);
+   
   };
-
+  const limpaInputs = () => {
+    setNomeCliente("");
+    setTelefoneCliente("");
+    setModalCadastrar(!modalCadastrar)
+  }
   //Começando método DELETE
   const userDeletar = async (item) => {
     const URL =
@@ -118,18 +127,21 @@ export default function Clientes({navigation}) {
         telefone: telefoneCliente,
       }),
     };
-    try {
-      await fetch(URL, options);
-      console.log("Deu Certo " + options.body);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setModalEditi({ data: {}, open: false });
-      getClientes();
+    const telefoneConflito = dataClientes.find(cliente => cliente.telefone.toLowerCase().trim() === telefoneCliente.toLowerCase().trim())
+    if(telefoneConflito){
+      Alert.alert("Desculpe, este telefone já está cadastrado!")
+    }else {
+      try {
+        await fetch(URL, options);
+        console.log("Deu Certo " + options.body);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setModalEditi({ data: {}, open: false });
+        getClientes();
+      }
     }
   };
-
-
   //Telas + Modals
   return (
     <SafeAreaView style={Styles.appDefault}>
@@ -141,7 +153,7 @@ export default function Clientes({navigation}) {
         <View style={{ flexDirection: "row", marginTop: 40, marginBottom: 30 }}>
           <BotaoCadastrar
             text={"Cadastrar"}
-            onPress={() => setModalCadastrar(!modalCadastrar)}
+            onPress={() => limpaInputs()}
           />
         </View>
         <TabelaClientesBarbearia

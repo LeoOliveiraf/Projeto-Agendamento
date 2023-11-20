@@ -6,10 +6,9 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/AntDesign';
 import Styles from "../../components/styles/Styles";
 import { useState } from "react";
 import { useEffect } from "react";

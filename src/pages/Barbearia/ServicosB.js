@@ -15,6 +15,12 @@ export default function ServicosC({navigation}) {
     const [valorServico, setValorServico] = useState("");
     const [duracaoServico, setDuracaoServico] = useState("");
 
+    const limparInputsAgendamento = () => {
+        setDuracaoServico("");
+        setNomeServico("");
+        setValorServico("");
+      }
+
     const openModalEdit = (item) => {
         setNomeServico(item.nome);
         setValorServico(item.valor.toString());
@@ -24,9 +30,6 @@ export default function ServicosC({navigation}) {
     const openModalDelete = (item) => {
         setModalDelete({open: true, data: item});
     };
-    const goToDashboard = () => {
-        navigation.goBack();
-      }
     
     //Começando o método GET
     const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/TipoServicoes";
@@ -45,6 +48,11 @@ export default function ServicosC({navigation}) {
     useEffect(() => {
         getServicos();
     }, []);
+
+    const abrirModalCadastrar = () => {
+        limparInputsAgendamento();
+        setModalCadastrar(!modalCadastrar);
+    }
     //Começando método POST
     const doPost = () => {
         const URL = "https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/TipoServicoes";
@@ -67,10 +75,10 @@ export default function ServicosC({navigation}) {
             return response.json();
         });
     };
-    const setData = () => {
+    const setData = async () => {
         doPost();
         setModalCadastrar(!modalCadastrar);
-        getServicos();
+        await getServicos();
     };
 
     //Começando método DELETE
@@ -131,7 +139,7 @@ export default function ServicosC({navigation}) {
         <View style={{flexDirection: "row", marginTop: 40, marginBottom: 30}}>
             <BotaoCadastrar
                 text={"Cadastrar"}
-                onPress={() => setModalCadastrar(!modalCadastrar)}
+                onPress={() => abrirModalCadastrar()}
             />
         </View>
         <TabelaServicosBarbearia
