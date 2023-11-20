@@ -7,6 +7,7 @@ import BotaoCadastrar from '../../components/BotaoCadastrar';
 import Modal from '../../components/Modal';
 import TabelaAgendamentosBarbearia from '../../components/TabelaAgendamentosBarbearia';
 import moment from 'moment';
+import moment2 from 'moment-timezone';
 
 export default function AgendamentosB({navigation}) {
   const [modalAgendar, setModalAgendar] = useState(false);
@@ -21,7 +22,7 @@ export default function AgendamentosB({navigation}) {
   const [dataPesquisada, setDataPesquisada] = useState("");
 
   const BR_DATETIME_PATTERN = "DD/MM/YYYY HH:mm";
-  const  ISO_DATETIME_PATTERN = "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
+  const ISO_DATETIME_PATTERN = "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
 
   const transforToISoToFormat = (dateString) => {
     const date = moment(dateString, BR_DATETIME_PATTERN);
@@ -121,6 +122,7 @@ export default function AgendamentosB({navigation}) {
         barbeariaId: 1
       }),
     };
+
     const conflitoAgendamento = formatadaData.find(data => data.data.toLowerCase().trim() === dataHora.toLowerCase().trim());
     if(conflitoAgendamento){
       Alert.alert("Já existe um agendamento marcado para esse dia e horario!");
@@ -133,12 +135,22 @@ export default function AgendamentosB({navigation}) {
     setNomeCliente("");
     setNomeServico("");
     setDataHora("");
+    setModalAgendar(!modalAgendar)
   }
+
   const setData = async () => {
-    await doPost();
-    limparInputsAgendamento();
-    setModalAgendar(!modalAgendar);
-    await doGetAgendamento();
+    let dataAtual = moment() //agora
+    dataAtual = transforToISoToFormat(dataAtual)
+    const dataHoraDesformatada = transforToISoToFormat(dataHora) // o que ta na input
+    if(dataHoraDesformatada < dataAtual){
+      Alert.alert("Insira uma data no futuro")
+    }
+    else{
+      await doPost();
+      limparInputsAgendamento();
+      setModalAgendar(!modalAgendar);
+      await doGetAgendamento();
+    }
   };
   // Começando o método PUT
   const openModalEditar = (item) => {
@@ -147,6 +159,18 @@ export default function AgendamentosB({navigation}) {
     setDataHora(item.data);
     setModalEditar({open: true, data: item});
   };
+
+  const verificaDataPut = () => {
+    let dataAtual = moment() //agora
+    dataAtual = transforToISoToFormat(dataAtual)
+    const dataHoraDesformatada = transforToISoToFormat(dataHora) // o que ta na input
+    if(dataHoraDesformatada < dataAtual){
+      Alert.alert("Insira uma data no futuro")
+    }
+    else{
+      userEditar(modalEditar.data)
+    }
+  }
 
   const userEditar = async (item) => {
     const {id: serviceId} = listaServicos.find(servico => servico.nome.toLowerCase().trim() === nomeServico.toLowerCase().trim() );
@@ -202,7 +226,7 @@ export default function AgendamentosB({navigation}) {
         <LogoSecundaria>Agendamentos</LogoSecundaria>
         <BarraDePesquisa valorBarraPesquisa={dataPesquisada} changeBarraPesquisa={(data) => setDataPesquisada(data)}/>
         <View style={{ flexDirection: 'row', marginTop: 40, marginBottom: 40 }}>
-          <BotaoCadastrar text={"Agendar"} onPress={() => setModalAgendar(!modalAgendar)}/>
+          <BotaoCadastrar text={"Agendar"} onPress={() => limparInputsAgendamento()}/>
         </View>
         <Text style={[Styles.textLogoSecundaria, { fontSize: 25, alignSelf: 'flex-start', marginLeft: 10 }]}>{'Dia: ' + dataDia}</Text>
         <TabelaAgendamentosBarbearia 
@@ -231,7 +255,7 @@ export default function AgendamentosB({navigation}) {
         <Modal
           key={3}
           isText={false}
-          onClose={() => userEditar(modalEditar.data)}
+          onClose={() => verificaDataPut()}
           visible={modalEditar.open}
           text={"Editar"}
           valueNomeAgendamentoCliente={nomeCliente}
