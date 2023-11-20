@@ -16,17 +16,6 @@ export default function Clientes({navigation}) {
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
   const [modalEditi, setModalEditi] = useState({ data: {}, open: false });
 
-  const formatarTelefone = (telefone) => {
-    const telefoneLimpo = telefone.replace(/[^\d]/g, '');
-    const telefoneFormatado = `(${telefoneLimpo.slice(0, 2)}) ${telefoneLimpo.slice(2, 7)}-${telefoneLimpo.slice(7, 11)}`;
-    return telefoneFormatado;
-  };
-
-  const handleInputChangeTelefone = (inputValue) => {
-    const telefoneFormatado = formatarTelefone(inputValue);
-    setTelefoneCliente(telefoneFormatado);
-  };
-
 
   const openModalEditi = (item) => {
     setNomeCliente(item.nome); 
@@ -88,16 +77,18 @@ export default function Clientes({navigation}) {
       };
     }
   const chamaPut = () =>{
-    if(telefoneCliente.length < 15){
-      Alert.alert("Telefone Invalido")
+    if(telefoneCliente.length < 11 || nomeCliente == ''){
+      Alert.alert("Todos os campos devem ser preenchidos completamente")
     }else {
       doPut(modalEditi.data);
     }
   }
   const setData = async () => {
-    if(telefoneCliente.length < 15){
-      Alert.alert("Telefone Invalido")
-    }else {
+    if(telefoneCliente.length < 11 || nomeCliente == ''){
+      Alert.alert("Todos os campos devem ser preenchidos completamente")
+    }
+    
+    else {
       doPost();
       getClientes();
       setModalCadastrar(!modalCadastrar);
@@ -186,7 +177,7 @@ export default function Clientes({navigation}) {
           text={"Cadastrar"}
           isInput={true}
           inputNomeCliente={setNomeCliente}
-          inputTelefoneCliente={handleInputChangeTelefone}
+          inputTelefoneCliente={setTelefoneCliente}
           valueNome={nomeCliente}
           valueTelefone={telefoneCliente}
           onCloseTeste={() => setModalCadastrar({ data: {}, open: false })}
@@ -201,7 +192,7 @@ export default function Clientes({navigation}) {
           text={"Editar"}
           isInput={true}
           inputNomeCliente={setNomeCliente}
-          inputTelefoneCliente={handleInputChangeTelefone}
+          inputTelefoneCliente={setTelefoneCliente}
           valueNome={nomeCliente}
           valueTelefone={telefoneCliente}
           onCloseTeste={() => setModalEditi({ data: {}, open: false })}
