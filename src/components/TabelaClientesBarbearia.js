@@ -12,11 +12,11 @@ export default function App({ dataClientes, onDelete, onEditi }) {
           <View style={{width:110}}>
             <DataTable.Title textStyle={[styles.title, {marginLeft: 15}]}>Nome</DataTable.Title>
           </View>
-          <View style={{width:110, marginLeft: 5}}>
+          <View style={{width:110, marginLeft: -20}}>
             <DataTable.Title textStyle={styles.title}>Telefone</DataTable.Title>
           </View>
           <View style={{width:110}}>
-            <DataTable.Title style={{ marginLeft: 5 }} textStyle={styles.title}>Ações</DataTable.Title>
+            <DataTable.Title style={{ marginLeft: 20 }} textStyle={styles.title}>Ações</DataTable.Title>
           </View>
         </DataTable.Header>
         {dataClientes.map((item) => (
@@ -33,7 +33,7 @@ export default function App({ dataClientes, onDelete, onEditi }) {
               </DataTable.Cell>
             </View>
             <View style={{width:110}}>
-              <DataTable.Cell textStyle={[styles.cell, {marginLeft: 25}]}>
+              <DataTable.Cell textStyle={[styles.cell,]}>
                 {item.telefone}
               </DataTable.Cell>
             </View>
