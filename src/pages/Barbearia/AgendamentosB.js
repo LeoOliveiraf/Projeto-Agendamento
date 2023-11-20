@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { SafeAreaView, ScrollView, Text, View, Alert } from 'react-native';
 import Styles from '../../components/styles/Styles';
 import LogoSecundaria from '../../components/LogoSecundaria';
 import BarraDePesquisa from '../../components/BarraDePesquisa';
@@ -19,9 +19,6 @@ export default function AgendamentosB({navigation}) {
   const [modalEditar, setModalEditar] = useState({ data: {}, open: false });
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
   const [dataPesquisada, setDataPesquisada] = useState("");
-  const [nomeServicoEditar, setNomeServicoEditar] = useState("");
-  const [dataHoraEditar, setDataHoraEditar] = useState("");
-  const [nomeClienteEditar, setNomeClienteEditar] = useState("");
 
   const BR_DATETIME_PATTERN = "DD/MM/YYYY HH:mm";
   const  ISO_DATETIME_PATTERN = "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
@@ -32,7 +29,7 @@ export default function AgendamentosB({navigation}) {
   }
 
   const formatIsoToBrData = (isoDate) => {
-    return !isoDate ? "" : moment.utc(isoDate).format("DD/MM/YYYY");
+    return !isoDate ? "" : moment.utc(isoDate).format("DD/MM/YYYY HH:mm");
   }
     
   //Carregando dados - GET Serviços
@@ -124,21 +121,29 @@ export default function AgendamentosB({navigation}) {
         barbeariaId: 1
       }),
     };
-    const response =  await fetch(URL, options)
-    const data = await response.json();
+    const conflitoAgendamento = formatadaData.find(data => data.data.toLowerCase().trim() === dataHora.toLowerCase().trim());
+    if(conflitoAgendamento){
+      Alert.alert("Já existe um agendamento marcado para esse dia e horario!");
+    }else{
+      const response =  await fetch(URL, options)
+      const data = await response.json();
+    }
   };
+  const limparInputsAgendamento = () => {
+    setNomeCliente("");
+    setNomeServico("");
+    setDataHora("");
+  }
   const setData = async () => {
     await doPost();
+    limparInputsAgendamento();
     setModalAgendar(!modalAgendar);
     await doGetAgendamento();
   };
   
   // Começando o método PUT
   const openModalEditar = (item) => {
-    const { clienteNome, tipoServicoNome, data } = item;
-    setNomeClienteEditar(clienteNome);
-    setNomeServicoEditar(tipoServicoNome);
-    setDataHoraEditar(data);
+
     setModalEditar({open: true, data: item});
   };
 
@@ -148,7 +153,6 @@ export default function AgendamentosB({navigation}) {
     setDataHora(dataHora);
     setNomeCliente(nomeCliente);
     setNomeServico(nomeServico);
-    
     const URL = `https://barbershop-backend-dev-aftj.3.us-1.fl0.io/api/Agendamentoes/${item.id}`;
     const options = {
       method: "PUT",
@@ -158,7 +162,7 @@ export default function AgendamentosB({navigation}) {
       },
       body: JSON.stringify({
         id: item.id,
-        data: dataHora,
+        data: transforToISoToFormat(dataHora),
         tipoServicoId: serviceId,
         clienteId: clienteId,
         barbeariaId: 1
@@ -171,6 +175,7 @@ export default function AgendamentosB({navigation}) {
     } catch (error) {
       console.log("Erro na solicitação: ", error);
     } finally {
+      limparInputsAgendamento();
       setModalEditar({data: {}, open: false});
       doGetAgendamento();
     }
@@ -182,7 +187,7 @@ export default function AgendamentosB({navigation}) {
       data: formatIsoToBrData(item.data)
     };
   });
-  
+
   dataDia = dataPesquisada;
   //Tela + Modals
   return (
@@ -223,9 +228,9 @@ export default function AgendamentosB({navigation}) {
           onClose={() => userEditar(modalEditar.data)}
           visible={modalEditar.open}
           text={"Editar"}
-          valueNomeAgendamentoCliente={nomeClienteEditar}
-          valueNomeServico={nomeServicoEditar}
-          valueDataHora={dataHoraEditar}
+          valueNomeAgendamentoCliente={nomeCliente.clienteNome}
+          valueNomeServico={nomeServico}
+          valueDataHora={dataHora}
           inputNome={setNomeCliente}
           inputNomeServico={setNomeServico}
           inputDataHora={setDataHora}
