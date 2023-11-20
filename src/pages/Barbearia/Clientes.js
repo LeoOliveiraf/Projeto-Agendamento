@@ -150,7 +150,6 @@ export default function Clientes({navigation}) {
     };
       try {
         await fetch(URL, options);
-        console.log("Deu Certo " + options.body);
       } catch (error) {
         console.error(error);
       } finally {
