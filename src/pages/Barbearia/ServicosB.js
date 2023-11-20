@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, View, } from "react-native";
+import { Alert, SafeAreaView, ScrollView, View, } from "react-native";
 import LogoSecundaria from "../../components/LogoSecundaria";
 import Styles from "../../components/styles/Styles";
 import { useState, useEffect } from "react";
@@ -19,7 +19,7 @@ export default function ServicosC({navigation}) {
         setDuracaoServico("");
         setNomeServico("");
         setValorServico("");
-      }
+    }
 
     const openModalEdit = (item) => {
         setNomeServico(item.nome);
@@ -76,9 +76,14 @@ export default function ServicosC({navigation}) {
         });
     };
     const setData = async () => {
-        doPost();
-        setModalCadastrar(!modalCadastrar);
-        await getServicos();
+        if(nomeServico == '' || valorServico == '' || duracaoServico == ''){
+            Alert.alert("Todos os campos devem ser preenchidos!")
+        }
+        else{
+            doPost();
+            setModalCadastrar(!modalCadastrar);
+            await getServicos();
+        }
     };
 
     //Começando método DELETE
@@ -122,12 +127,20 @@ export default function ServicosC({navigation}) {
         };
         try {
             await fetch(URL, options);
-            console.log("Deu certo ", options.body);
         } catch (error) {
             console.error("Erro ao editar serviço: ", error);
         } finally {
             setModalEdit({data: {}, open: false});
             getServicos();
+        }
+    }
+
+    const validacaoCamposPut = () => {
+        if(nomeServico == '' || valorServico == '' || duracaoServico == ''){
+            Alert.alert("Todos os campos devem ser preenchidos!")
+        }
+        else{
+            doPut(modalEdit.data);
         }
     }
 
@@ -180,7 +193,7 @@ export default function ServicosC({navigation}) {
         <Modal
             key={3}
             isText={false}
-            onClose={() => doPut(modalEdit.data)}
+            onClose={() => validacaoCamposPut()}
             visible={modalEdit.open}
             text={"Editar"}
             inputModalService={true}
