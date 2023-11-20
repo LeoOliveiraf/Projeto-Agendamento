@@ -16,7 +16,17 @@ export default function Clientes({navigation}) {
   const [modalDelete, setModalDelete] = useState({ data: {}, open: false });
   const [modalEditi, setModalEditi] = useState({ data: {}, open: false });
 
-  
+  const formatarTelefone = (telefone) => {
+    const telefoneLimpo = telefone.replace(/[^\d]/g, '');
+    const telefoneFormatado = `(${telefoneLimpo.slice(0, 2)}) ${telefoneLimpo.slice(2, 7)}-${telefoneLimpo.slice(7, 11)}`;
+    return telefoneFormatado;
+  };
+
+  const handleInputChangeTelefone = (inputValue) => {
+    const telefoneFormatado = formatarTelefone(inputValue);
+    setTelefoneCliente(telefoneFormatado);
+  };
+
 
   const openModalEditi = (item) => {
     setNomeCliente(item.nome); 
@@ -63,9 +73,10 @@ export default function Clientes({navigation}) {
         telefone: telefoneCliente,
       }),
     };
+    const nomeConflito = dataClientes.find(cliente =>  cliente.nome.toLowerCase().trim() === nomeCliente.toLowerCase().trim());
     const telefoneConflito = dataClientes.find(cliente => cliente.telefone.toLowerCase().trim() === telefoneCliente.toLowerCase().trim())
-    if(telefoneConflito){
-      Alert.alert("Desculpe, este telefone já está cadastrado!")
+    if(telefoneConflito || nomeConflito){
+      Alert.alert("Desculpe, este nome ou telefone já está cadastrado!")
     }else{
       try {
         await fetch(URL, options);
@@ -76,11 +87,21 @@ export default function Clientes({navigation}) {
       }
       };
     }
+  const chamaPut = () =>{
+    if(telefoneCliente.length < 15){
+      Alert.alert("Telefone Invalido")
+    }else {
+      doPut(modalEditi.data);
+    }
+  }
   const setData = async () => {
-    doPost();
-    getClientes();
-    setModalCadastrar(!modalCadastrar);
-   
+    if(telefoneCliente.length < 15){
+      Alert.alert("Telefone Invalido")
+    }else {
+      doPost();
+      getClientes();
+      setModalCadastrar(!modalCadastrar);
+    }
   };
   const limpaInputs = () => {
     setNomeCliente("");
@@ -127,10 +148,6 @@ export default function Clientes({navigation}) {
         telefone: telefoneCliente,
       }),
     };
-    const telefoneConflito = dataClientes.find(cliente => cliente.telefone.toLowerCase().trim() === telefoneCliente.toLowerCase().trim())
-    if(telefoneConflito){
-      Alert.alert("Desculpe, este telefone já está cadastrado!")
-    }else {
       try {
         await fetch(URL, options);
         console.log("Deu Certo " + options.body);
@@ -140,7 +157,6 @@ export default function Clientes({navigation}) {
         setModalEditi({ data: {}, open: false });
         getClientes();
       }
-    }
   };
   //Telas + Modals
   return (
@@ -171,7 +187,7 @@ export default function Clientes({navigation}) {
           text={"Cadastrar"}
           isInput={true}
           inputNomeCliente={setNomeCliente}
-          inputTelefoneCliente={setTelefoneCliente}
+          inputTelefoneCliente={handleInputChangeTelefone}
           valueNome={nomeCliente}
           valueTelefone={telefoneCliente}
           onCloseTeste={() => setModalCadastrar({ data: {}, open: false })}
@@ -181,12 +197,12 @@ export default function Clientes({navigation}) {
         <Modal
           key={3}
           isText={false}
-          onClose={() => doPut(modalEditi.data)}
+          onClose={() => chamaPut()}
           visible={modalEditi.open}
           text={"Editar"}
           isInput={true}
           inputNomeCliente={setNomeCliente}
-          inputTelefoneCliente={setTelefoneCliente}
+          inputTelefoneCliente={handleInputChangeTelefone}
           valueNome={nomeCliente}
           valueTelefone={telefoneCliente}
           onCloseTeste={() => setModalEditi({ data: {}, open: false })}
