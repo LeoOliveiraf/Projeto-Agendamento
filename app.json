@@ -1,4 +1,3 @@
-
 {
   "expo": {
     "name": "frontend",
@@ -6,6 +5,11 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "0748db63-41fd-475e-8761-f79393cecfeb"
+      }
+    }
   }
 }
